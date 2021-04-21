@@ -1,0 +1,20 @@
+{%extends 'post/base.html'%}
+{%load crispy_forms_tags%}
+
+{%block content%}
+	<div class="container mt-3">
+		<form method="POST">
+			{% csrf_token %}
+			<fieldset class='form-group'>
+				<legend class='border-bottom mb-4'>Group Details</legend>
+				{{ form|crispy }}
+			</fieldset>
+			<div class="form-group mt-3">
+				<button class="btn btn-primary" type="submit">Confirm</button>
+			</div>
+		</form>
+	</div>
+{%endblock content%}
+
+
+

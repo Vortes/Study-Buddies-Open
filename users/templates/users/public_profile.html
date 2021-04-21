@@ -1,0 +1,26 @@
+{%extends 'post/base.html'%}
+
+{% load static %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'users/css/login_register.css' %}">
+<link rel="stylesheet" href="{% static 'users/css/profile.css' %}">
+{% endblock header %}
+
+{%block content%}
+<div class="container">
+<div class="bg-light p-5 rounded m-3 profile-body">
+  <h1 class="">{{ profile.username }}</h1>
+  <img id="account_img" class="rounded-circle shadow account-img" src="{{ other_profile_url }}">
+  <div class="account-body">
+  </div>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" name="add_friend" class="btn btn-primary mb-4" value="">Add Friend</button>
+  </form>
+
+</div>
+</div>
+
+{%endblock content%}
+

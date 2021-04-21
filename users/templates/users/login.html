@@ -1,0 +1,60 @@
+{%extends 'post/base.html'%}
+{% load static %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static '/users/css/login_register.css' %}"> 
+{% endblock header %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row no-gutter">
+        <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image" id="login-bg"></div>
+        <div class="col-md-8 col-lg-6">
+            <div class="login d-flex align-items-center py-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-9 col-lg-8 mx-auto">
+                            <h3 class="login-heading mb-4">Welcome back!</h3>
+                            <div class="content-section">
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <fieldset class="form-group">
+                                        <legend class="border-bottom mb-4">Sign In</legend>
+                                        {{ form|crispy }}
+                                    </fieldset>
+                                    <div class="mt-2 form-group">
+                                        <button class="btn btn-primary mb-3" type="submit">Login</button>
+                                    <small class="text-muted">
+                                        <a class="px-2" id="forgot-password" href="{% url 'password_reset' %}">Forgot password?</a>
+                                    </small>
+                                    </div>
+                                </form>
+                                {% load socialaccount %}
+                                {% providers_media_js %}
+
+                                </div>
+                                <div class="border-top pt-3">
+                                    <small class="text-muted">
+                                        Need An Account? <a class="ml-2 login-with-google" href="{% url 'register' %}">Sign Up</a>
+                                    </small>
+
+                                <div class="mt-3">
+                                    <div class="google-btn">
+                                    <div class="google-icon-wrapper">
+                                        <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+                                    </div>
+                                    <a class="btn-text" href="{% provider_login_url 'google' %}"><b>Sign in with google</b></a>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+
