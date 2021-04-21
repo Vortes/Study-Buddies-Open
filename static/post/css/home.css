@@ -1,0 +1,53 @@
+/* body{ */
+/* 	font-family: 'system-ui'; */
+/* } */
+
+html {
+	scroll-behavior: smooth;
+}
+
+.scrolling-wrapper{
+	overflow-x: auto;
+}
+
+.scrolling-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.card-block{
+	top: 0;
+	height: 250px;
+	background-position: center;
+	background-size: cover;
+	transition: top ease 0.2s;
+	border-radius: 24px;
+	text-transform: capitalize;
+}
+
+.card-block:hover {
+	top: -8px;
+}
+
+a {
+	text-decoration: none;
+	color: rgb(56,54,77);
+}
+
+.card-date {
+	color: rgb(224, 105, 78);
+}
+
+.post-tag {
+	color: rgb(219, 48, 105);
+}
+
+#search-form {
+	background-color: rgb(246, 247, 248) 
+}
+
+.post-img {
+	height: 28px;
+    width: 28px;
+	object-fit: cover;
+    margin-right: 10px;
+}

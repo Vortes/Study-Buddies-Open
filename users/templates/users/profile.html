@@ -1,0 +1,36 @@
+{%extends 'post/base.html'%}
+{%load crispy_forms_tags%}
+
+{% load static %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'users/css/login_register.css' %}">
+<link rel="stylesheet" href="{% static 'users/css/profile.css' %}">
+{% endblock header %}
+
+{%load crispy_forms_tags%}
+{%block content%}
+<div class="container">
+<div class="bg-light p-5 rounded m-3 profile-body">
+  <h1 class="">My Account</h1>
+  <div class="account-body">
+          <h2 class="account-heading mt-3">{{ user.username }}</h2>
+          <p class="text-secondary pb-2">{{ user.email }}</p>
+          <form method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <fieldset class="form-group">
+                  <legend class="border-bottom mb-4">User Information</legend>
+                <img id="account_img" class="rounded-circle shadow account-img" src="{{ profile_image_url }}">
+                  {{ u_form|crispy }}
+                  {{ p_form|crispy }}
+              </fieldset>
+              <div class="form-group">
+                  <button class="mt-3 btn btn-primary" type="submit">Update</button>
+              </div>
+          </form>
+  </div>
+</div>
+</div>
+
+{%endblock content%}
+
