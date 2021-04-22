@@ -1,31 +1,31 @@
-/* .scrolling-wrapper { */
-/* 	overflow-x: auto; */
-/* } */
+  .scrolling-wrapper {   
+  	overflow-x: auto;   
+  }   
 
-/* .post-img { */
-/* 	height: 40px; */
-/*     width: 40px; */
-/* } */
+  .post-img {   
+  	height: 40px;   
+      width: 40px;   
+  }   
 
-/* #date { */
-/* 	color: rgb(125,144,144) */
-/* } */
+  #date {   
+  	color: rgb(125,144,144)   
+  }   
 
-/* .current-buddies { */
-/* 	border-top: 1px solid rgba(46,62,72,.12); */
-/* 	background-color: rgb(246, 247, 248) */ 
-/* } */
+  .current-buddies {   
+  	border-top: 1px solid rgba(46,62,72,.12);   
+  	background-color: rgb(246, 247, 248)    
+  }   
 
-/* .card-block { */
-/* 	width: 10rem; */
-/* 	height: 12rem; */
-/* 	border-radius: 20px; */
-/* 	background-position: center; */
-/* 	background-size: cover; */
-/* } */
+  .card-block {   
+  	width: 10rem;   
+  	height: 12rem;   
+  	border-radius: 20px;   
+  	background-position: center;   
+  	background-size: cover;   
+  }   
 
-/* #profile-img-card { */
-/*  height: 80px; */
-/*  width: 80px; */
-/* } */
+  #profile-img-card {   
+   height: 80px;   
+   width: 80px;   
+  }   
 
