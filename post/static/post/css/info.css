@@ -1,0 +1,11 @@
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.display-4 {
+    color: #4a4b65;
+}
+
+.text-muted {
+    color: #9e9fb4 !important;
+}

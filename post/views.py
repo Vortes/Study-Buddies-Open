@@ -17,7 +17,19 @@ from django.conf import settings
 from users.models import Profile
 import boto3
 
+def home_view(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect('/home')
+
+    context = {}
+    return render(request, "post/info-home.html", context)
+
 def post_view(request):
+
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect('/login')
+
+
     context = {}
     myFilter = PostFilter()
 

@@ -1,0 +1,26 @@
+{%extends 'post/base.html'%}
+{% load static %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'post/css/info.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@519&display=swap" rel="stylesheet">
+{% endblock header %}
+
+{%block content%}
+    <section class="container mb-3 my-md-0 py-5 py-md-6">
+        <div class="row align-items-center">
+                <div class="col-lg-4 col-md-5 order-md-1 order-2 text-md-start text-center">
+                    <h1 class="display-4 mb-lg-4 mb-3">
+                        Study Buddies
+                    </h1>
+                    <h2 class="mb-lg-5 mb-4 text-muted">
+                        Find your Study Group, Made For Students, Built By Students
+                    </h2>
+                    
+                </div>
+                <div class="col-lg-8 col-md-7 order-md-2 order-1 mb-md-0 mb-grid-gutter">
+                    <img src="{% static 'post/images/info-logo.svg' %}">
+                </div>
+            </div>
+    </section>
+{%endblock content%}

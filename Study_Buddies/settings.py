@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "django_filters",
     "storages",
     "allauth",
+    'channels',
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
@@ -139,3 +140,4 @@ AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+ASGI_APPLICATION = 'Study_Buddies.asgi.application'

@@ -16,16 +16,6 @@
 	<title>Study Buddies</title>
 	{%endif%}
 
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-SMLEE8Y7KG"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-
-	  gtag('config', 'G-SMLEE8Y7KG');
-	</script>
-
 	<script src="https://kit.fontawesome.com/3c3c229c53.js" crossorigin="anonymous"></script>
 
 	{% block header %}{% endblock header %}
@@ -35,7 +25,7 @@
 
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
 		<div class="container-fluid">
-			<a id="name" class="navbar-brand" href="{% url 'post-home' %}">Study Buddies</a>
+			<a id="name" class="navbar-brand" href="{% url 'post-info' %}">Study Buddies</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 				data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
 				aria-label="Toggle navigation">
