@@ -94,3 +94,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 .bg-faded-primary {
     background-color: rgba(118,109,244,0.08) !important;
 }
+
+.blockquote {
+    color: rgba(118,109,244,0.5);
+}
