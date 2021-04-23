@@ -27,6 +27,8 @@
         </div>
     </section>
 
+    <div class="mb-5"></div>
+
     <section class="bg-faded-primary position-relative py-md-7 py-5">
         <div class="container my-2 my-md-0">
             <div class="row align-items-center">
@@ -34,12 +36,30 @@
                     <img src="{% static 'post/images/03.svg' %}" alt="" class="d-block mx-md-0 mx-auto">
                 </div>
 
-                <div class="col-lg-6 offset-lg-1 col-md-7 text-md-start text-center">
+                <div class="col-lg-6 offset-lg-1 col-md-7 text-md-start text-center my-3">
                     <div class="mx-md-0 mx-auto" style="max-width: 500px;">
                         <h2 class="mb-md-5 mb-4">How To Get Started</h2>
-                        <div class="d-md-flex align-items-start d-block mb-4 pb-2"></div>
-                        <div class="d-md-flex align-items-start d-block mb-4 pb-2"></div>
-                        <div class="d-md-flex align-items-start d-block"></div>
+                        <div class="d-md-flex align-items-start d-block mb-4 pb-2">
+                            <i class="fas fa-search me-md-4 mb-md-0 mb-4 pt-1"></i>
+                            <div class="ps-md-2">
+                                <h3 class="h5 mb-2">Searching</h3>
+                                <p class="mb-0 fs-sm">Choose the subject, the maximum amount of people in the group, as well as whether you want the group's camera or mic to be turned off or not.</p>
+                            </div>
+                        </div>
+                        <div class="d-md-flex align-items-start d-block mb-4 pb-2">
+                            <i class="fas fa-link me-md-4 mb-md-0 mb-4"></i>
+                            <div class="ps-md-2">
+                                <h3 class="h5 mb-2">Joining Groups</h3>
+                                <p class="mb-0 fs-sm">When you join a group, you will see the groups link (Zoom, Google Meets, Etc..)</p>
+                            </div>
+                        </div>
+                        <div class="d-md-flex align-items-start d-block">
+                            <i class="fas fa-plus me-md-4 mb-md-0 mb-4"></i>
+                            <div class="ps-md-2">
+                                <h3 class="h5 mb-2">Create Your Own Group</h3>
+                                <p class="mb-0 fs-sm">If you cant seem to find what you need, you can always create your own group! Remember to put in a link so others can join your meeting!</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -53,6 +73,24 @@
         </div>
 
     </section>
+
+    <div class="mb-5"></div>
+
+    <section class="container pb-5 mb-md-4 pb-md-7">
+        <div class="row align-items-center">
+            <div class="col-md-6 offset-lg-1 order-md-2">
+                <img src="{% static 'post/images/illustration02.svg' %}" class="d-block mx-md-0 mx-auto">
+            </div>
+            <div class="col-md-6 col-lg-5 order-md-1 pt-4 pt-md-0">
+                <h2 class="mt-4 mb-5 text-center text-md-start">What Students Say About Us</h2>
+                <div class="tns-carousel-wrapper">
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
 </main>
 
 {%endblock content%}
