@@ -44,21 +44,24 @@
                             <i class="fas fa-search me-md-4 mb-md-0 mb-4 pt-1"></i>
                             <div class="ps-md-2">
                                 <h3 class="h5 mb-2">Searching</h3>
-                                <p class="mb-0 fs-sm">Choose the subject, the maximum amount of people in the group, as well as whether you want the group's camera or mic to be turned off or not.</p>
+                                <p class="mb-0 fs-sm">Choose the subject, the maximum amount of people in the group, as
+                                    well as whether you want the group's camera or mic to be turned off or not.</p>
                             </div>
                         </div>
                         <div class="d-md-flex align-items-start d-block mb-4 pb-2">
                             <i class="fas fa-link me-md-4 mb-md-0 mb-4"></i>
                             <div class="ps-md-2">
                                 <h3 class="h5 mb-2">Joining Groups</h3>
-                                <p class="mb-0 fs-sm">When you join a group, you will see the groups link (Zoom, Google Meets, Etc..)</p>
+                                <p class="mb-0 fs-sm">When you join a group, you will see the groups link (Zoom, Google
+                                    Meets, Etc..)</p>
                             </div>
                         </div>
                         <div class="d-md-flex align-items-start d-block">
                             <i class="fas fa-plus me-md-4 mb-md-0 mb-4"></i>
                             <div class="ps-md-2">
                                 <h3 class="h5 mb-2">Create Your Own Group</h3>
-                                <p class="mb-0 fs-sm">If you cant seem to find what you need, you can always create your own group! Remember to put in a link so others can join your meeting!</p>
+                                <p class="mb-0 fs-sm">If you cant seem to find what you need, you can always create your
+                                    own group! Remember to put in a link so others can join your meeting!</p>
                             </div>
                         </div>
                     </div>
@@ -76,38 +79,44 @@
     </section>
 
     <div class="mb-5"></div>
+    
     <section class="container">
-    {% if enough_posts %}
-    {% for post in recent_posts %}
-        <div class="card card-block m-3 border-0 shadow overflow-auto" style='width:23rem;'>
-			<div class="col-sm">
-				<div class="card-body">
-					<h3><a class="card-title stretched-link" id="title"
-							href="{% url 'post-detail' post.pk %}">{{post.title}}<span class="post-tag"> |
-								{{post.subject}}</span></a>
-					</h3>
-					<p class="card-subtitle card-date mb-2 pr-2">{{post.date_posted|date:"F, d Y"}} - 
-					{% if post.quiet_tag %}
-						<i class="fas fa-volume-mute"></i>
-					{% else %}
-						<i class="fas fa-microphone"></i>
-					{% endif %}
+        <h1 class="pt-3">Recently Created Groups</h1>
+        <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
+        {% if enough_posts %}
+        {% for post in recent_posts %}
+            <div class="card card-block m-3 border-0 shadow overflow-auto" style='width:23rem;'>
+                <div class="col-sm">
+                    <div class="card-body">
+                        <h3><a class="card-title stretched-link" id="title"
+                                href="{% url 'post-detail' post.pk %}">{{post.title}}<span class="post-tag"> |
+                                    {{post.subject}}</span></a>
+                        </h3>
+                        <p class="card-subtitle card-date mb-2 pr-2">{{post.date_posted|date:"F, d Y"}} -
+                            {% if post.quiet_tag %}
+                            <i class="fas fa-volume-mute"></i>
+                            {% else %}
+                            <i class="fas fa-microphone"></i>
+                            {% endif %}
 
-					{% if post.camera_tag %}
-						<i class="fas fa-video-slash"></i>
-					{% else %}
-						<i class="fas fa-camera"></i>
-					{% endif %}
-					</p>
-					<p><img class="rounded-circle post-img" src="{{post.author.profile.image.url}}"> <strong>{{post.author.first_name}} {{post.author.last_name}}</strong></p>
-					<p>Total Buddies: {{post.num_participants}} / {{post.max_buddies}}</p>
-				</div>
-			</div>
-		</div>
+                            {% if post.camera_tag %}
+                            <i class="fas fa-video-slash"></i>
+                            {% else %}
+                            <i class="fas fa-camera"></i>
+                            {% endif %}
+                        </p>
+                        <p><img class="rounded-circle post-img" src="{{post.author.profile.image.url}}">
+                            <strong>{{post.author.first_name}} {{post.author.last_name}}</strong></p>
+                        <p>Total Buddies: {{post.num_participants}} / {{post.max_buddies}}</p>
+                    </div>
+                </div>
+            </div>
         {% endfor %}
-    {% else %}
-        <h1>Not enough posts</h1>
-    {% endif %}
+        {% else %}
+        {% endif %}
+    </div>
+    </section>
+        
 
     </section>
     <div class="mb-5"></div>
@@ -156,31 +165,29 @@
     <footer class="bg-dark text-center text-white">
         <!-- Grid container -->
         <div class="container p-4 pb-0">
-          <!-- Section: Social media -->
-          <section class="mb-4">
-            <!-- Instagram -->
-            <a class="btn btn-outline-light btn-floating m-2" href="https://www.instagram.com/zal_weng/" role="button"
-              ><i class="fab fa-instagram"></i
-            ></a>
-      
-            <!-- Linkedin -->
-            <a class="btn btn-outline-light btn-floating m-2" href="https://www.linkedin.com/in/alan-weng-4a0641179/" role="button"
-              ><i class="fab fa-linkedin-in"></i
-            ></a>
-      
-            <!-- Github -->
-            <a class="btn btn-outline-light btn-floating m-2" href="https://github.com/Vortes" role="button"
-              ><i class="fab fa-github"></i
-            ></a>
-          </section>
-          <!-- Section: Social media -->
+            <!-- Section: Social media -->
+            <section class="mb-4">
+                <!-- Instagram -->
+                <a class="btn btn-outline-light btn-floating m-2" href="https://www.instagram.com/zal_weng/"
+                    role="button"><i class="fab fa-instagram"></i></a>
+
+                <!-- Linkedin -->
+                <a class="btn btn-outline-light btn-floating m-2"
+                    href="https://www.linkedin.com/in/alan-weng-4a0641179/" role="button"><i
+                        class="fab fa-linkedin-in"></i></a>
+
+                <!-- Github -->
+                <a class="btn btn-outline-light btn-floating m-2" href="https://github.com/Vortes" role="button"><i
+                        class="fab fa-github"></i></a>
+            </section>
+            <!-- Section: Social media -->
         </div>
         <!-- Grid container -->
-      
+
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
             © 2021 Study Buddies, Inc. Made with care ♡
         </div>
-      </footer>
+    </footer>
 
 </main>
 
