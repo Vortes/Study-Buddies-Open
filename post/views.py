@@ -21,7 +21,19 @@ def home_view(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('/home')
 
-    context = {}
+    all_posts = Post.objects.all().count()
+    print(all_posts)
+    recent_posts = 0
+
+    if all_posts >= 3:
+        print("hello")
+        enough_posts = True
+        recent_posts = Post.objects.all().order_by('-id')[:3]
+    else:
+        print("bad")
+        enough_posts = False
+
+    context = {"recent_posts": recent_posts, "enough_posts": enough_posts}
     return render(request, "post/info-home.html", context)
 
 def post_view(request):

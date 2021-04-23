@@ -3,6 +3,7 @@
 
 {% block header %}
 <link rel="stylesheet" href="{% static 'post/css/info.css' %}">
+<link rel="stylesheet" href="{% static 'post/css/home.css' %}">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@519&display=swap" rel="stylesheet">
 {% endblock header %}
 
@@ -74,6 +75,41 @@
 
     </section>
 
+    <div class="mb-5"></div>
+    <section class="container">
+    {% if enough_posts %}
+    {% for post in recent_posts %}
+        <div class="card card-block m-3 border-0 shadow overflow-auto" style='width:23rem;'>
+			<div class="col-sm">
+				<div class="card-body">
+					<h3><a class="card-title stretched-link" id="title"
+							href="{% url 'post-detail' post.pk %}">{{post.title}}<span class="post-tag"> |
+								{{post.subject}}</span></a>
+					</h3>
+					<p class="card-subtitle card-date mb-2 pr-2">{{post.date_posted|date:"F, d Y"}} - 
+					{% if post.quiet_tag %}
+						<i class="fas fa-volume-mute"></i>
+					{% else %}
+						<i class="fas fa-microphone"></i>
+					{% endif %}
+
+					{% if post.camera_tag %}
+						<i class="fas fa-video-slash"></i>
+					{% else %}
+						<i class="fas fa-camera"></i>
+					{% endif %}
+					</p>
+					<p><img class="rounded-circle post-img" src="{{post.author.profile.image.url}}"> <strong>{{post.author.first_name}} {{post.author.last_name}}</strong></p>
+					<p>Total Buddies: {{post.num_participants}} / {{post.max_buddies}}</p>
+				</div>
+			</div>
+		</div>
+        {% endfor %}
+    {% else %}
+        <h1>Not enough posts</h1>
+    {% endif %}
+
+    </section>
     <div class="mb-5"></div>
 
     <section class="container pb-5 mb-md-4 pb-md-7">
