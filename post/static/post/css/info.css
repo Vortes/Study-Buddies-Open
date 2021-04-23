@@ -14,6 +14,12 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     color: #4a4b65;
 }
 
+img, figure {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+
 .custom-btn {
     display: inline-block;
     font-weight: 500;
@@ -98,3 +104,4 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 .blockquote {
     color: rgba(118,109,244,0.5);
 }
+
