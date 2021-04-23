@@ -2,10 +2,95 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
+.page-wrapper {
+    flex: 1 0 auto;
+}
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+    margin-top: 0;
+    margin-bottom: .75rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #4a4b65;
+}
+
+.custom-btn {
+    display: inline-block;
+    font-weight: 500;
+    line-height: 1.5;
+    color: #737491;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: .5625rem 1.25rem;
+    font-size: 1rem;
+    border-radius: .75rem;
+    transition: color 0.25s ease-in-out,background-color 0.25s ease-in-out,border-color 0.25s ease-in-out;
+}
+
+.btn-translucent-primary {
+    color: #766df4;
+    background-color: rgba(118,109,244,0.08);
+}
+
+.btn-translucent-primary:hover {
+    background-color: #766df4;
+    color: white;
+}
+
+
 .display-4 {
     color: #4a4b65;
 }
 
 .text-muted {
     color: #9e9fb4 !important;
+}
+
+.shape.bg-body {
+    color: #fff !important;
+}
+
+.shape.bg-light, .shape.bg-body, .shape.bg-primary, .shape.bg-secondary, .shape.bg-dark, .shape.bg-darker {
+    background-color: transparent !important;
+}
+
+.shape-curve {
+    padding-bottom: 6.2%;
+}
+
+.shape-top {
+    top: 0;
+    margin-top: -1px;
+}
+
+.shape-top, .shape-bottom {
+    width: 100%;
+    left: 0;
+}
+
+.shape svg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.shape {
+    position: absolute;
+    width: 100%;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.bg-faded-primary {
+    background-color: rgba(118,109,244,0.08) !important;
 }

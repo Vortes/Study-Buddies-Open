@@ -7,20 +7,52 @@
 {% endblock header %}
 
 {%block content%}
+<main class="page-wrapper">
     <section class="container mb-3 my-md-0 py-5 py-md-6">
         <div class="row align-items-center">
-                <div class="col-lg-4 col-md-5 order-md-1 order-2 text-md-start text-center">
-                    <h1 class="display-4 mb-lg-4 mb-3">
-                        Study Buddies
-                    </h1>
-                    <h2 class="mb-lg-5 mb-4 text-muted">
-                        Find your Study Group, Made For Students, Built By Students
-                    </h2>
-                    
-                </div>
-                <div class="col-lg-8 col-md-7 order-md-2 order-1 mb-md-0 mb-grid-gutter">
-                    <img src="{% static 'post/images/info-logo.svg' %}">
+            <div class="col-lg-4 col-md-5 order-md-1 order-2 text-md-start text-center">
+                <h1 class="display-4 mb-lg-4 mb-3">
+                    Study Buddies
+                </h1>
+                <h2 class="mb-lg-5 mb-4 text-muted">
+                    Find your Study Group, Made For Students. Built By Students
+                </h2>
+                <div class="text-nowrap">
+                    <a class="custom-btn btn btn-translucent-primary me-3" href="">Get Started</a>
                 </div>
             </div>
+            <div class="col-lg-8 col-md-7 order-md-2 order-1 mb-md-0 mb-grid-gutter">
+                <img src="{% static 'post/images/info-logo.svg' %}">
+            </div>
+        </div>
     </section>
+
+    <section class="bg-faded-primary position-relative py-md-7 py-5">
+        <div class="container my-2 my-md-0">
+            <div class="row align-items-center">
+                <div class="col-md-5 mb-md-0 mb-5 pb-md-0 pb-3">
+                    <img src="{% static 'post/images/03.svg' %}" alt="" class="d-block mx-md-0 mx-auto">
+                </div>
+
+                <div class="col-lg-6 offset-lg-1 col-md-7 text-md-start text-center">
+                    <div class="mx-md-0 mx-auto" style="max-width: 500px;">
+                        <h2 class="mb-md-5 mb-4">How To Get Started</h2>
+                        <div class="d-md-flex align-items-start d-block mb-4 pb-2"></div>
+                        <div class="d-md-flex align-items-start d-block mb-4 pb-2"></div>
+                        <div class="d-md-flex align-items-start d-block"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="shape shape-top shape-curve bg-body">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4">
+                <path fill="currentColor" d="M3000,185.4V0H0v185.4C496.4,69.8,996.4,12,1500,12S2503.6,69.8,3000,185.4z">
+                </path>
+            </svg>
+        </div>
+
+    </section>
+</main>
+
 {%endblock content%}
