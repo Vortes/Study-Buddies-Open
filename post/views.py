@@ -4,7 +4,7 @@ from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.models import User
-from .models import Post
+from .models import Post, Message
 from .forms import CreateForm
 from users.models import Profile
 from .filters import PostFilter
@@ -113,11 +113,12 @@ def detail_view(request, pk):
         post_id2.save()
         messages.success(request, f"You have left {post_id2}")
 
+    chats = Message.objects.filter(postPk=pk)[0:25]
     detail = Post.objects.get(pk=pk)
     response = ""
     if request.user.is_authenticated:
         response = get_presigned_url(request.user)
-    context = {"detail": detail, "participants": participants,  "profile_image_url": response }
+    context = {"detail": detail, "participants": participants, "profile_image_url": response, "chats":chats, "pk":pk,}
     return render(request, "post/post_detail.html", context)
 
 

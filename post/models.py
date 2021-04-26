@@ -4,6 +4,15 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 
 
+class Message(models.Model):
+    firstName = models.CharField(max_length=255)
+    postPk = models.IntegerField()
+    content = models.TextField()
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('date_added',)
+
 class Category(models.Model):
     category_name = models.CharField(max_length=50)
 

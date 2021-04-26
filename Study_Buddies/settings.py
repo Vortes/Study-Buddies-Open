@@ -64,7 +64,16 @@ TEMPLATES = [ {
 ]
 
 WSGI_APPLICATION = "Study_Buddies.wsgi.application"
+ASGI_APPLICATION = 'Study_Buddies.asgi.application'
 
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('127.0.0.1', 6379)],
+        }
+    }
+}
 
 # Database https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 

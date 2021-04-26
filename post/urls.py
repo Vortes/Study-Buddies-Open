@@ -8,7 +8,7 @@ from .views import (
 
 urlpatterns = [
     path("", views.home_view, name="post-info"),
-    path("home", views.post_view, name="post-home"),
+    path("home/", views.post_view, name="post-home"),
     path("post/<int:pk>/", views.detail_view, name="post-detail"),
     path("post/<int:pk>/update/", PostUpdateView.as_view(), name="post-update"),
     path("post/<int:pk>/delete/", PostDeleteView.as_view(), name="post-delete"),
