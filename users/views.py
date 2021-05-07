@@ -13,6 +13,7 @@ import boto3
 import time
 import json
 
+
 def register(request):
 
     response = ''
@@ -137,7 +138,8 @@ def public_profile(request, pk):
     context["request_sent"] = request_sent
     context['id'] = profile.id
 
-    return render(request, "users/public_profile.html", context)
+    return render(request, "users/public_profile.html", context)   
+
 
 @login_required()
 def list_friend_requests(request, pk):
@@ -160,8 +162,6 @@ def list_friend_requests(request, pk):
 
     return render(request, "users/friend_requests.html", context)
         
-
-
 
 def send_friend_request(request):
     user = request.user
@@ -223,6 +223,50 @@ def accept_friend_request(request, *args, **kwargs):
     
     return HttpResponse(json.dumps(payload), content_type="application/json")
 
+
+@login_required()
+def decline_friend_request(request, *args, **kwargs):
+    user = request.user
+    payload = {}
+    if request.method == "GET":
+        friend_request_id = kwargs.get("friend_request_id")
+        if friend_request_id:
+            friend_request = FriendRequest.objects.get(pk=friend_request_id)
+            # confirm that is the correct request
+            if friend_request.receiver == user:
+                if friend_request:
+                    # found the request, now Decline it
+                    friend_request.decline()
+                    payload['reponse'] = "Friend request Declined"
+                else:
+                    payload['response'] = "Something went wrong"
+            else:
+                payload['response'] = "That is not your request to accept"
+        else:
+            payload['response'] = "Unable to accept that friend request"
+    
+    return HttpResponse(json.dumps(payload), content_type="application/json")
+
+
+@login_required()
+def remove_friend(request, *args, **kwargs):
+    user = request.user
+    payload = {}
+
+    if request.method == "POST":
+        user_id = request.POST.get("receiver_user_id")
+        if user_id:
+            try:
+                removee = User.objects.get(pk=user_id)
+                friend_list = FriendList.objects.get(user=user)
+                friend_list.unfriend(removee)
+                payload['response'] = "Successfully removed that friend"
+            except Exception as e:
+                payload['response'] = f"Something went wrong: {str(e)}"
+        else:
+            payload['response'] = "Something went wrong"
+
+    return HttpResponse(json.dumps(payload), content_type="application/json")
 
 
 def get_presigned_url(user):

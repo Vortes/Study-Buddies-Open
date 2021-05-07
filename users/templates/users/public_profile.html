@@ -37,7 +37,7 @@
       {% endif %}
     {% endif %}
 
-    {% if is_friend %}
+    {% if is_friend %} 
       <a href="#", onclick="removeFriend('{{id}}', onFriendRemoved)">Unfriend</a>
     {% endif %}
   {% endif %}
@@ -67,6 +67,13 @@
       })
   }
 
+  var removeFriendBtn = document.getElementById("id_unfriend_btn")
+  if (removeFriendBtn != null) {
+    removeFriendBtn.addEventListener("click", function() {
+      removeFriend("{{id}}", onFriendRemoved)
+    })
+  }
+
   function triggerAcceptFriendRequest(friend_request_id) {
     acceptFriendRequest(friend_request_id, onFriendRequestAccepted)
   }
@@ -78,6 +85,8 @@
 
 {% include 'users/snippets/send_friend_request.html' %}
 {% include 'users/snippets/accept_friend_request.html' %}
+{% include 'users/snippets/decline_friend_request.html' %}
+{% include 'users/snippets/remove_friend.html' %}
 
 {%endblock content%}
 

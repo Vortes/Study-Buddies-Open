@@ -1,14 +1,18 @@
-<script type="text/javascript">
-    function acceptFriendRequest(friend_request_id, uiUpdateFunction) {
-        var url = "{% url 'accept-friend-request' friend_request_id=3024958743098573940754983%}".replace("3024958743098573940754983", friend_request_id)
+<script>
+    function removeFriend(id, uiUpdateFunction) {
+        payload = {
+            "csrfmiddlewaretoken": "{{csrf_token}}",
+            "receiver_user_id": id,
+        }
 
         $.ajax({
-            type: "GET",
+            type: "POST",
             dataType: "json",
-            url: url,
             timeout: 5000,
+            url: "{% url 'remove-friend' %}",
+            data: payload,
             success: function(data) {
-                if(data.response == "Friend request accepted") {
+                if(data.response == "Successfully removed that friend") {
 
                 }
                 else if(data.response != null) {
@@ -16,7 +20,7 @@
                 }
             },
             error: function(data) {
-                alert("Something went wrong :(")
+                alert("Something went wrong")
             },
             complete: function(data) {
                 uiUpdateFunction()

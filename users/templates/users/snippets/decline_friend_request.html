@@ -1,6 +1,6 @@
 <script type="text/javascript">
-    function acceptFriendRequest(friend_request_id, uiUpdateFunction) {
-        var url = "{% url 'accept-friend-request' friend_request_id=3024958743098573940754983%}".replace("3024958743098573940754983", friend_request_id)
+    function declineFriendRequest(friend_request_id, uiUpdateFunction) {
+        var url = "{% url 'decline-friend-request' friend_request_id=3024958743098573940754983%}".replace("3024958743098573940754983", friend_request_id)
 
         $.ajax({
             type: "GET",
@@ -8,7 +8,7 @@
             url: url,
             timeout: 5000,
             success: function(data) {
-                if(data.response == "Friend request accepted") {
+                if(data.response == "Friend request declined") {
 
                 }
                 else if(data.response != null) {

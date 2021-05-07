@@ -69,7 +69,6 @@ class FriendRequest(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
-    friend_list = models.ForeignKey(FriendList, default=None, null=True, on_delete=models.CASCADE, related_name="friend_list")
     participating_in = models.ForeignKey(
         Post, on_delete=models.SET_NULL, default=None, null=True, related_name="participating_in"
     )

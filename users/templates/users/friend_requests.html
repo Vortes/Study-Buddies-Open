@@ -33,12 +33,12 @@
     }
 
     function triggerDeclineFriendRequest(friend_request_id) {
-        // declineFriendRequest(friend_request_id, onFriendRequestDeclined)
+        declineFriendRequest(friend_request_id, onFriendRequestDeclined)
     }
 
 </script>
 
-{#% include 'users/snippets/decline_friend_request.html' %#}
+{% include 'users/snippets/decline_friend_request.html' %}
 {% include 'users/snippets/accept_friend_request.html' %}
 
 {%endblock content%}
