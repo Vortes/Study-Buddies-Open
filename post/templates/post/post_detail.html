@@ -29,7 +29,9 @@
 		<div class="card card-block m-3 mx-2 border-0 shadow overflow-auto text-center" >
 			<div class="col-sm">
 				<div class="card-body">
-					<img class="rounded-circle mt-2" id="profile-img-card" src="{{participant.user.profile.image.url}}">
+					<a href="{% url 'public-profile' participant.user.id %}">
+						<img class="rounded-circle mt-2" id="profile-img-card" src="{{participant.user.profile.image.url}}">
+					</a>
 					<p class="pt-3"><strong class="px-2">{{participant.user.first_name}} {{participant.user.last_name}} </strong></p>
 				</div>
 			</div>

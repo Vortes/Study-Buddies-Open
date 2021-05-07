@@ -127,6 +127,29 @@ def public_profile(request, pk):
 
     return render(request, "users/public_profile.html", context)
 
+@login_required()
+def list_friend_requests(request, pk):
+    user = request.user
+    profile = User.objects.get(pk=pk)
+
+    if user == profile:
+        friend_requests = FriendRequest.objects.filter(receiver=profile, is_active=True)
+    else:
+        return HttpResponse("You can't view another users friend requests.")
+    
+    response = ""
+    if request.user.is_authenticated:
+        response = get_presigned_url(request.user)
+    
+    context = {
+        "friend_requests": friend_requests,
+        "profile_image_url": response,
+    }
+
+    return render(request, "users/friend_requests.html", context)
+        
+
+
 
 def send_friend_request(request):
     user = request.user

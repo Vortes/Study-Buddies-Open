@@ -18,7 +18,9 @@
           <p class="text-secondary pb-2">{{ user.email }}</p>
           <p>Friends ({{friends|length}})</p>
           {% if friend_requests %}
+          <a class="btn btn-primary" href="{% url 'list-friend-requests' user.id %}">
             <p>Friend Requests ({{friend_requests|length}})</p>
+          </a>
           {% endif %}
           <form method="POST" enctype="multipart/form-data">
               {% csrf_token %}
