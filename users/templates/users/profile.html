@@ -16,6 +16,10 @@
   <div class="account-body">
           <h2 class="account-heading mt-3">{{ user.username }}</h2>
           <p class="text-secondary pb-2">{{ user.email }}</p>
+          <p>Friends ({{friends|length}})</p>
+          {% if friend_requests %}
+            <p>Friend Requests ({{friend_requests|length}})</p>
+          {% endif %}
           <form method="POST" enctype="multipart/form-data">
               {% csrf_token %}
               <fieldset class="form-group">

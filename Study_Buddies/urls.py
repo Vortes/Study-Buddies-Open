@@ -7,11 +7,12 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("", include("post.urls"), name="post-home"),
-    path("secrectaccessadmin/", admin.site.urls),
+    path("secretaccessadmin/", admin.site.urls),
     path("accounts/", include("allauth.urls")),
     path("register/", user_views.register, name="register"),
     path("profile/", user_views.profile, name="profile"),
     path("profile/<int:pk>/", user_views.public_profile, name="public_profile"),
+    path('profile/friend_request/', user_views.send_friend_request, name="friend-request"),
     path(
         "login/",
         auth_views.LoginView.as_view(template_name="users/login.html"),

@@ -12,15 +12,58 @@
 <div class="bg-light p-5 rounded m-3 profile-body">
   <h1 class="">{{ profile.username }}</h1>
   <img id="account_img" class="rounded-circle shadow account-img" src="{{ other_profile_url }}">
+  <p>Friends ({{friends|length}})</p>
   <div class="account-body">
   </div>
-  <form method="post">
-    {% csrf_token %}
-    <button type="submit" name="add_friend" class="btn btn-primary mb-4" value="">Add Friend</button>
-  </form>
+
+  {% if request.user.is_authenticated %}
+
+    {% if request_sent == 0 %}
+      <p>Accept friend request</p>
+
+      <span id="id_cancel_{{id}}" class="btn-btn-danger" onclick='triggerDeclineFriendRequest("{{pending_friend_request_id}}")'>Cancel</span>
+      <span id="id_confirm_{{id}}" class="btn-btn-danger" onclick='triggerAcceptFriendRequest("{{pending_friend_request_id}}")'>Accept</span>
+    {% endif %}
+
+    {% if is_friend == False %}
+      {% if request_sent == 1 %}
+        <button class="btn btn-danger" id="id_cancel_friend_request_btn">Cancel Friend Request</button>
+      {% endif %}
+
+      {% if request_sent == -1 %}
+        <button class="btn btn-primary" id="id_send_friend_request_btn">Send Friend Request</button>
+      {% endif %}
+    {% endif %}
+
+    {% if is_friend %}
+      <a href="#", onclick="removeFriend('{{id}}', onFriendRemoved)">Unfriend</a>
+    {% endif %}
+  {% endif %}
 
 </div>
 </div>
+
+<script type="text/javascript">
+  function onFriendRequestSent() {
+    location.reload()
+  }
+
+  var sendFriendRequestBtn = document.getElementById("id_send_friend_request_btn")
+  if (sendFriendRequestBtn != null) {
+      sendFriendRequestBtn.addEventListener("click", function(){
+          sendFriendRequest("{{id}}", onFriendRequestSent)
+      })
+  }
+
+  var cancelFriendRequestBtn = document.getElementById("id_cancel_friend_request_btn")
+  if (cancelFriendRequestBtn != null) {
+      cancelFriendRequestBtn.addEventListener("click", function(){
+          
+      })
+  }
+</script>
+
+{% include 'users/snippets/send_friend_request.html' %}
 
 {%endblock content%}
 
