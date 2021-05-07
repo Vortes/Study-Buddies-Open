@@ -86,7 +86,6 @@ def public_profile(request, pk):
     is_friend = False
     request_sent = FriendRequestStatus.NO_REQUEST_SENT.value
 
-
     # Get the friends of the profile you searched for
     try:
         friend_list = FriendList.objects.get(user=profile)
@@ -107,22 +106,18 @@ def public_profile(request, pk):
         else:
             is_friend = False
             
-            print("data: ", get_friend_request_or_false(sender=request.user, receiver=profile))
             # CASE 1: Request has been sent from THEM to YOU
             if get_friend_request_or_false(sender=profile, receiver=request.user) != False:
                 request_sent = FriendRequestStatus.THEM_SENT_TO_YOU.value
-                print("request_sent1: ", request_sent)
                 context['pending_friend_request_id'] = get_friend_request_or_false(sender=profile, receiver=request.user).id
 
             # CASE 2: Request has been sent from YOU to THEM
             elif get_friend_request_or_false(sender=request.user, receiver=profile) != False:
                 request_sent = FriendRequestStatus.YOU_SENT_TO_THEM.value
-                print("request_sent2: ", request_sent)
 
             # CASE 3: No request has been sent
             else:
-                request_sent = FriendRequestStatus.NO_REQUEST_SENT.value
-                print("request_sent3: ", request_sent)  
+                request_sent = FriendRequestStatus.NO_REQUEST_SENT.value 
 
 
     response = ""
@@ -170,7 +165,6 @@ def send_friend_request(request):
         user_id = request.POST.get("receiver_user_id")
         if user_id:
             receiver = User.objects.get(id=user_id)
-            print("receiver: ", receiver)
             try:
                 friend_requests = FriendRequest.objects.filter(sender=user, receiver=receiver)
                 try:
@@ -210,9 +204,7 @@ def accept_friend_request(request, *args, **kwargs):
             if friend_request.receiver == user:
                 if friend_request:
                     # found the request, now accept it
-                    print("Hello there")
                     friend_request.accept()
-                    print("Friend request accepted")
                     payload['reponse'] = "Friend request accepted"
                 else:
                     payload['response'] = "Something went wrong"
@@ -246,6 +238,42 @@ def decline_friend_request(request, *args, **kwargs):
             payload['response'] = "Unable to accept that friend request"
     
     return HttpResponse(json.dumps(payload), content_type="application/json")
+
+
+@login_required()
+def cancel_friend_request(request, *args, **kwargs):
+    user = request.user
+    payload = {}
+    print("kdlsjfl")
+    if request.method == "POST":
+        print("kdlsjfl")
+        user_id = request.POST.get("receiver_user_id")
+        if user_id:
+            print("got receiver")
+            receiver = User.objects.get(pk=user_id)
+            try:
+                friend_requests = FriendRequest.objects.filter(sender=user, receiver=receiver, is_active=True)
+            except Exception as e:
+                payload['response'] = "Nothing to cancel. Friend request does not exist"
+            
+            # There should only ever be a single active friend request at any given time.
+            # Cancel them all just in case
+
+            if len(friend_requests) > 1:
+                for request in friend_requests:
+                    print("cancelling...")
+                    request.cancel()
+                    print("cancelled!")
+                payload['response'] = "Friend request cancelled"
+            else:
+                # found the requst. Now cancel
+                friend_requests.first().cancel()
+                payload['response'] = "Friend request cancelled"
+        else:
+            payload['response'] = "Unable to cancel that friend request"
+    
+    return HttpResponse(json.dumps(payload), content_type="application/json")
+
 
 
 @login_required()

@@ -23,7 +23,7 @@
         <p>accept friend request</p>
       </div>
 
-      <span id="id_cancel_{{id}}" class="btn-btn-danger" onclick='triggerDeclineFriendRequest("{{pending_friend_request_id}}")'>Cancel</span>
+      <span id="id_cancel_{{id}}" class="btn-btn-danger" onclick='triggerDeclineFriendRequest("{{pending_friend_request_id}}")'>Decline</span>
       <span id="id_confirm_{{id}}" class="btn-btn-danger" onclick='triggerAcceptFriendRequest("{{pending_friend_request_id}}")'>Accept</span>
     {% endif %}
 
@@ -63,7 +63,7 @@
   var cancelFriendRequestBtn = document.getElementById("id_cancel_friend_request_btn")
   if (cancelFriendRequestBtn != null) {
       cancelFriendRequestBtn.addEventListener("click", function(){
-          
+        cancelFriendRequest("{{id}}", onFriendRequestCancelled)
       })
   }
 
@@ -81,11 +81,13 @@
   function triggerDeclineFriendRequest(friend_request_id) {
     declineFriendRequest(friend_request_id, onFriendRequestDeclined)
   }
+
 </script>
 
 {% include 'users/snippets/send_friend_request.html' %}
 {% include 'users/snippets/accept_friend_request.html' %}
 {% include 'users/snippets/decline_friend_request.html' %}
+{% include 'users/snippets/cancel_friend_request.html' %}
 {% include 'users/snippets/remove_friend.html' %}
 
 {%endblock content%}

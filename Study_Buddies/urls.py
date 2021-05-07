@@ -17,6 +17,7 @@ urlpatterns = [
     path('profile/friend_request/<int:pk>/', user_views.list_friend_requests, name="list-friend-requests"),
     path('profile/accept_friend_request/<friend_request_id>/', user_views.accept_friend_request, name="accept-friend-request"),
     path('profile/decline_friend_request/<friend_request_id>/', user_views.decline_friend_request, name="decline-friend-request"),
+    path('profile/cancel_friend_request/', user_views.cancel_friend_request, name="cancel-friend-request"),
     path(
         "login/",
         auth_views.LoginView.as_view(template_name="users/login.html"),
