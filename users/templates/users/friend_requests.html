@@ -14,14 +14,32 @@
         {% for friend in friend_requests %}
         <p>{{friend.sender.first_name}}</p>
         <img class="rounded-circle mt-2" id="profile-img-card" src="{{friend.sender.profile.image.url}}">
-        <span id="id_cancel_{{friend.sender.id}}" onclick='triggerAcceptFriendRequest("{{ request.id }}")'>Accept</span>
-        <span id="id_cancel_{{friend.sender.id}}" onclick='triggerDeclineFriendRequest("{{ request.id }}")'>Decline</span>
+        <span class="btn btn-primary" id="id_confirm_{{friend.sender.id}}" onclick='triggerAcceptFriendRequest("{{ friend.id }}")'>Accept</span>
+        <span class="btn btn-danger" id="id_cancel_{{friend.sender.id}}" onclick='triggerDeclineFriendRequest("{{ friend.id }}")'>Decline</span>
         {% endfor %}
     {% else %}
     <p>no friend requests</p>
     {% endif %}
 </div>
 </div>
+
+<script>
+
+    function onFriendRequestAccepted() {location.reload()}
+    function onFriendRequestDeclined() {location.reload()}
+
+    function triggerAcceptFriendRequest(friend_request_id) {
+        acceptFriendRequest(friend_request_id, onFriendRequestAccepted)
+    }
+
+    function triggerDeclineFriendRequest(friend_request_id) {
+        // declineFriendRequest(friend_request_id, onFriendRequestDeclined)
+    }
+
+</script>
+
+{#% include 'users/snippets/decline_friend_request.html' %#}
+{% include 'users/snippets/accept_friend_request.html' %}
 
 {%endblock content%}
 

@@ -13,7 +13,8 @@ urlpatterns = [
     path("profile/", user_views.profile, name="profile"),
     path("profile/<int:pk>/", user_views.public_profile, name="public-profile"),
     path('profile/friend_request/', user_views.send_friend_request, name="friend-request"),
-    path('profile/friend_request/<int:pk>', user_views.list_friend_requests, name="list-friend-requests"),
+    path('profile/friend_request/<int:pk>/', user_views.list_friend_requests, name="list-friend-requests"),
+    path('profile/accept_friend_request/<friend_request_id>/', user_views.accept_friend_request, name="accept-friend-request"),
     path(
         "login/",
         auth_views.LoginView.as_view(template_name="users/login.html"),

@@ -46,9 +46,12 @@
 </div>
 
 <script type="text/javascript">
-  function onFriendRequestSent() {
-    location.reload()
-  }
+ 
+  function onFriendRequestSent() {location.reload()}
+  function onFriendRequestCancelled() {location.reload()}
+  function onFriendRemoved() {location.reload()}
+ 
+
 
   var sendFriendRequestBtn = document.getElementById("id_send_friend_request_btn")
   if (sendFriendRequestBtn != null) {
@@ -63,9 +66,18 @@
           
       })
   }
+
+  function triggerAcceptFriendRequest(friend_request_id) {
+    acceptFriendRequest(friend_request_id, onFriendRequestAccepted)
+  }
+
+  function triggerDeclineFriendRequest(friend_request_id) {
+    declineFriendRequest(friend_request_id, onFriendRequestDeclined)
+  }
 </script>
 
 {% include 'users/snippets/send_friend_request.html' %}
+{% include 'users/snippets/accept_friend_request.html' %}
 
 {%endblock content%}
 

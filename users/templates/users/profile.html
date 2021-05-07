@@ -38,5 +38,23 @@
 </div>
 </div>
 
+<script>
+
+  function onFriendRequestAccepted() {location.reload()}
+  function onFriendRequestDeclined() {location.reload()}
+
+  function triggerAcceptFriendRequest(friend_request_id) {
+      acceptFriendRequest(friend_request_id, onFriendRequestAccepted)
+  }
+
+  function triggerDeclineFriendRequest(friend_request_id) {
+      declineFriendRequest(friend_request_id, onFriendRequestDeclined)
+  }
+
+</script>
+
+{#% include 'users/snippets/decline_friend_request.html' %#}
+{% include 'users/snippets/accept_friend_request.html' %}
+
 {%endblock content%}
 

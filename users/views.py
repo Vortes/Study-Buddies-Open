@@ -41,6 +41,17 @@ def profile(request):
     except:
         pass
 
+    # Get the friends of the profile you searched for
+    try:
+        friend_list = FriendList.objects.get(user=request.user)
+    # if they dont have a friendlist, make a new one
+    except FriendList.DoesNotExist:
+        friend_list = FriendList(user=request.user)
+        friend_list.save()
+
+    # Get number of friends
+    friends = friend_list.friends.all()
+
     if request.method == "POST":
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(
@@ -58,6 +69,7 @@ def profile(request):
     response = get_presigned_url(request.user)
 
     context = {
+        "friends": friends,
         "u_form": u_form,
         "p_form": p_form,
         "profile_image_url": response,
@@ -184,6 +196,33 @@ def send_friend_request(request):
         payload['response'] = "You must be authenticated to send a friend request."
     
     return HttpResponse(json.dumps(payload), content_type="application/json")
+
+
+@login_required()
+def accept_friend_request(request, *args, **kwargs):
+    user = request.user
+    payload = {}
+    if request.method == "GET":
+        friend_request_id = kwargs.get("friend_request_id")
+        if friend_request_id:
+            friend_request = FriendRequest.objects.get(pk=friend_request_id)
+            # confirm that is the correct request
+            if friend_request.receiver == user:
+                if friend_request:
+                    # found the request, now accept it
+                    print("Hello there")
+                    friend_request.accept()
+                    print("Friend request accepted")
+                    payload['reponse'] = "Friend request accepted"
+                else:
+                    payload['response'] = "Something went wrong"
+            else:
+                payload['response'] = "That is not your request to accept"
+        else:
+            payload['response'] = "Unable to accept that friend request"
+    
+    return HttpResponse(json.dumps(payload), content_type="application/json")
+
 
 
 def get_presigned_url(user):
