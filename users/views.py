@@ -93,7 +93,17 @@ def public_profile(request, pk):
     except FriendList.DoesNotExist:
         friend_list = FriendList(user=profile)
         friend_list.save()
+    
     friends = friend_list.friends.all()
+    
+    # Get your friendlist
+    try:
+        friend_list_current_user = FriendList.objects.get(user=request.user)
+    # if they you dont have a friendlist, make a new one
+    except FriendList.DoesNotExist:
+        friend_list_current_user = FriendList(user=request.user)
+        friend_list_current_user.save()
+
 
     # if current user is trying to access their own profile
     if request.user.is_authenticated and profile == request.user:
