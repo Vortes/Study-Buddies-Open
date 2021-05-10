@@ -12,6 +12,7 @@ urlpatterns = [
     path("register/", user_views.register, name="register"),
     path("profile/", user_views.profile, name="profile"),
     path("profile/<int:pk>/", user_views.public_profile, name="public-profile"),
+    path('profile/list_friends/<user_id>', user_views.friend_list, name="list-friends"),
     path('profile/friend_remove/', user_views.remove_friend, name="remove-friend"),
     path('profile/friend_request/', user_views.send_friend_request, name="friend-request"),
     path('profile/friend_request/<int:pk>/', user_views.list_friend_requests, name="list-friend-requests"),

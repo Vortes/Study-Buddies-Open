@@ -36,7 +36,6 @@ def register(request):
 
 @login_required
 def profile(request):
-
     try:
         friend_requests = FriendRequest.objects.filter(receiver=request.user, is_active=True)
     except:
@@ -99,7 +98,7 @@ def public_profile(request, pk):
     # Get your friendlist
     try:
         friend_list_current_user = FriendList.objects.get(user=request.user)
-    # if they you dont have a friendlist, make a new one
+    # if you dont have a friendlist, make a new one
     except FriendList.DoesNotExist:
         friend_list_current_user = FriendList(user=request.user)
         friend_list_current_user.save()
@@ -144,6 +143,40 @@ def public_profile(request, pk):
     context['id'] = profile.id
 
     return render(request, "users/public_profile.html", context)   
+
+@login_required()
+def friend_list(request, *args, **kwargs):
+    context = {}
+    user = request.user
+    user_id = kwargs.get("user_id")
+    if user_id:
+        try:
+            this_user = User.objects.get(pk=user_id)
+            context['this_user'] = this_user
+        except User.DoesNotExist:
+            return HttpResponse("That user does not exist")
+        try:
+            friend_list = FriendList.objects.get(user=this_user)
+        except FriendList.DoesNotExist:
+            return HttpResponse(f"could not find a friends list for {this_user.username}")
+            
+        # Must be friends to view a friends list
+        # if user != this_user:
+        #     if not user in friend_list.friends.all():
+        #         return HttpResponse("you must be friends to view their friends list")
+
+        friends = [] # [(account1, True), (account2, False)]
+        auth_user_friend_list = FriendList.objects.get(user=user)
+        for friend in friend_list.friends.all():
+            friends.append((friend, auth_user_friend_list.is_mutual_friend(friend)))
+        context['friends'] = friends
+
+        response = get_presigned_url(request.user)
+        
+        context["profile_image_url"] = response
+    
+    
+    return render(request, "users/friend_list.html", context)
 
 
 @login_required()
@@ -254,9 +287,7 @@ def decline_friend_request(request, *args, **kwargs):
 def cancel_friend_request(request, *args, **kwargs):
     user = request.user
     payload = {}
-    print("kdlsjfl")
     if request.method == "POST":
-        print("kdlsjfl")
         user_id = request.POST.get("receiver_user_id")
         if user_id:
             print("got receiver")

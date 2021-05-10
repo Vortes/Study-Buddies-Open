@@ -1,0 +1,42 @@
+{%extends 'post/base.html'%}
+
+{% load static %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static 'users/css/login_register.css' %}">
+<link rel="stylesheet" href="{% static 'users/css/profile.css' %}">
+{% endblock header %}
+
+{%block content%}
+
+<div class="container">
+    {% if friends %}
+
+    {% for friend in friends %}
+        <a href="{% url 'public-profile' friend.0.profile.user.id %}">
+            <img class="rounded-circle mt-2" id="profile-img-card" src="{{friend.0.profile.image.url}}">
+        </a>
+        <p>{{friend.0.profile.user.first_name}}</p>
+
+        <div>
+            {% if friend.1 %}
+                <p>friends</p>
+                <a href="#">Unfriend</a>
+            {% else %}
+            {% if friends.0 != request.user %}
+                <p>not friends</p>
+                <a href="#">Add Friend</a>
+            {% endif %}
+
+            {% if friend.0 == request.user %}
+            {% endif %}
+            {% endif %}
+        </div>
+    {% endfor %}
+
+{% else %}
+        <p>No friends yet.</p>
+{% endif %}
+</div>
+
+{%endblock content%}

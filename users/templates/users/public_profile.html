@@ -12,7 +12,9 @@
 <div class="bg-light p-5 rounded m-3 profile-body">
   <h1 class="">{{ profile.username }}</h1>
   <img id="account_img" class="rounded-circle shadow account-img" src="{{ other_profile_url }}">
-  <p>Friends ({{friends|length}})</p>
+    <a class="btn btn-primary" href="{% url 'list-friends' profile.id %}">
+      <p>Friends ({{friends|length}})</p>
+    </a>
   <div class="account-body">
   </div>
 

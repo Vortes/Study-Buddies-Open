@@ -16,7 +16,9 @@
   <div class="account-body">
           <h2 class="account-heading mt-3">{{ user.username }}</h2>
           <p class="text-secondary pb-2">{{ user.email }}</p>
-          <p>Friends ({{friends|length}})</p>
+          <a class="btn btn-primary" href="{% url 'list-friends' user.id %}">
+            <p>Friends ({{friends|length}})</p>
+          </a>
           {% if friend_requests %}
           <a class="btn btn-primary" href="{% url 'list-friend-requests' user.id %}">
             <p>Friend Requests ({{friend_requests|length}})</p>
