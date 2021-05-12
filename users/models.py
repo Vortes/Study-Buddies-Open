@@ -46,6 +46,12 @@ class FriendRequest(models.Model):
     def __str__(self):
         return self.sender.username
     
+    def get_receiver(self):
+        return self.receiver
+    
+    def get_sender(self):
+        return self.sender
+    
     def accept(self):
         receiver_friend_list = FriendList.objects.get(user=self.receiver)
 

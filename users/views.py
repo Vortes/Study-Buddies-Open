@@ -149,6 +149,7 @@ def friend_list(request, *args, **kwargs):
     context = {}
     user = request.user
     user_id = kwargs.get("user_id")
+
     if user_id:
         try:
             this_user = User.objects.get(pk=user_id)
@@ -160,19 +161,38 @@ def friend_list(request, *args, **kwargs):
         except FriendList.DoesNotExist:
             return HttpResponse(f"could not find a friends list for {this_user.username}")
             
-        # Must be friends to view a friends list
-        # if user != this_user:
-        #     if not user in friend_list.friends.all():
-        #         return HttpResponse("you must be friends to view their friends list")
 
         friends = [] # [(account1, True), (account2, False)]
         auth_user_friend_list = FriendList.objects.get(user=user)
+
         for friend in friend_list.friends.all():
             friends.append((friend, auth_user_friend_list.is_mutual_friend(friend)))
+        
+        # get both recieved and sent friend requests
+        friend_request_sent = [] 
+        friend_request_received = []
+
+        get_friend_requests_sent = FriendRequest.objects.filter(sender=request.user, is_active=True)
+        get_friend_requests_received = FriendRequest.objects.filter(receiver=request.user, is_active=True)
+
+        for friend_request in get_friend_requests_sent:
+            friend_request_sent.append(friend_request.get_receiver())
+        
+        for friend_request in get_friend_requests_received:
+            friend_request_received.append(friend_request.get_sender())
+        
+        print(friend_request_sent)
+        print(get_friend_requests_sent)
+
         context['friends'] = friends
+        context['friend_request_sent'] = friend_request_sent
+        context['friend_request_received'] = friend_request_received
+        context['get_friend_request_sent'] = get_friend_requests_sent
+        context['get_friend_request_received'] = get_friend_requests_received
+        context['auth_user_friend_list'] = auth_user_friend_list
+
 
         response = get_presigned_url(request.user)
-        
         context["profile_image_url"] = response
     
     
@@ -242,6 +262,7 @@ def accept_friend_request(request, *args, **kwargs):
     if request.method == "GET":
         friend_request_id = kwargs.get("friend_request_id")
         if friend_request_id:
+            print("Hello", friend_request_id)
             friend_request = FriendRequest.objects.get(pk=friend_request_id)
             # confirm that is the correct request
             if friend_request.receiver == user:

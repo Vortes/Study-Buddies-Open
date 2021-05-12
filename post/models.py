@@ -43,9 +43,10 @@ class Post(models.Model):
     num_participants = models.IntegerField(default=1)
 
     class MaxGroupSize(models.IntegerChoices):
-        small = 5, "Small 1-5"
-        medium = 10, "Medium 1-10"
-        large = 20, "Large 1-20"
+        Small = 5, "Small 1-5"
+        Medium = 10, "Medium 1-10"
+        Large = 20, "Large 1-20"
+        Unlimited = 10000, "Unlimited"
 
     max_buddies = models.IntegerField(choices=MaxGroupSize.choices)
 
