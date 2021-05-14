@@ -8,7 +8,23 @@
 {% endblock header %}
 
 {%block content%}
+
 <div class="container">
+  <div class="row">
+    <div class="col">
+      Column
+    </div>
+    <div class="col">
+      Column
+    </div>
+    <div class="col">
+      Column
+    </div>
+  </div>
+</div>
+
+
+<div class="container mt-5">
 <div class="bg-light p-5 rounded m-3 profile-body">
   <h1 class="">{{ profile.username }}</h1>
   <img id="account_img" class="rounded-circle shadow account-img" src="{{ other_profile_url }}">

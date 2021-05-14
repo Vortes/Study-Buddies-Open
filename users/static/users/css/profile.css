@@ -2,3 +2,45 @@
     background-color: rgb(249, 250, 252)
 }
 
+.card-block{
+	top: 0;
+	height: 500px; 
+	background-position: center;
+	background-size: cover;
+	border-radius: 10px;
+	text-transform: capitalize;
+}
+
+.card-block-info{
+	height: 500px; 
+	background-position: center;
+	background-size: cover;
+	border-radius: 10px;
+	text-transform: capitalize;
+}
+
+.account-img {
+    height: 190px;
+    width: 190px;
+}
+
+.profile-container {
+    margin-top: 3rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+#username {
+	font-weight: 400;
+	font-size: 1.3rem;
+	color: rgb(92, 98, 107);
+}
+
+#num-buddies {
+	color: rgb(92, 98, 107);
+	text-decoration: none;
+}
+
+#num-buddies:hover {
+	color: rgb(43, 108, 208);
+}
