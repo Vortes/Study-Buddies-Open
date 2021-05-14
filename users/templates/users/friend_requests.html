@@ -8,7 +8,85 @@
 {% endblock header %}
 
 {%block content%}
-<div class="container">
+
+
+<div class="profile-container">
+
+  <div class="row row-cols-1">
+    <div class="col col-md-4 col-lg-3">
+
+    </div>
+
+    <div class="col col-lg-9 px-4">
+      <ul id="profile-nav" class="nav">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="{% url 'profile' %}"> <i class="fas fa-cog"></i> <span class="nav-profile">Edit Profile</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'list-friends' user.id %}"><i class="fas fa-user-friends"></i> <span class="nav-profile">Buddies</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'list-friend-requests' user.id %}"><i class="fas fa-bell"></i> <span class="nav-profile">Friend Requests</span></a>
+        </li>
+      </ul>
+      <hr class="mt-1">
+    </div>
+  </div>
+
+  <div class="row row-cols-1">
+    <div class="col col-md-4 col-lg-3">
+    <!-- Profile Info Section -->
+      <div class="card card-block border-0 shadow ">
+        <div class="container mt-2">
+          <img id="account_img" class="rounded-circle shadow account-img" src="{{ profile_image_url }}">
+          <div class="mt-2">
+            <h2 class="card-title mb-0">{{ user.first_name }} {{ user.last_name }}</h2>
+            <p id="username">{{user.username}}</p>
+            <a id="num-buddies" href="{% url 'list-friends' user.id %}">
+              <p><i class="fas fa-user-friends"></i> <span class="fw-bold">{{friends|length}}</span> Buddies</p>
+            </a>
+            {% if friend_requests %}
+          <a class="btn btn-primary" href="{% url 'list-friend-requests' user.id %}">
+            <p>Friend Requests ({{friend_requests|length}})</p>
+          </a>
+          {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col col-md-8 col-lg-9">
+      <div class="card border-0 card-block-info">
+        <div class="card-body card-info">
+            <div class="rounded m-3 profile-body">
+                {% if friend_requests %}
+                    {% for friend in friend_requests %}
+                    <p>{{friend.sender.first_name}}</p>
+                    <img class="rounded-circle mt-2" id="profile-img-card" src="{{friend.sender.profile.image.url}}">
+                    <span class="btn btn-primary" id="id_confirm_{{friend.sender.id}}" onclick='triggerAcceptFriendRequest("{{ friend.id }}")'>Accept</span>
+                    <span class="btn btn-danger" id="id_cancel_{{friend.sender.id}}" onclick='triggerDeclineFriendRequest("{{ friend.id }}")'>Decline</span>
+                    {% endfor %}
+                {% else %}
+                <p>No friend requests yet</p>
+                {% endif %}
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="bg-light p-5 rounded m-3 profile-body">
     {% if friend_requests %}
         {% for friend in friend_requests %}
@@ -20,7 +98,6 @@
     {% else %}
     <p>no friend requests</p>
     {% endif %}
-</div>
 </div>
 
 <script>

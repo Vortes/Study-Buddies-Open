@@ -9,58 +9,131 @@
 
 {%block content%}
 
-<div class="container">
-    {% if friends %}
+    <div class="profile-container">
 
-    {% for friend in friends %}
-    <div>
-        <a href="{% url 'public-profile' friend.0.profile.user.id %}">
-            <img class="rounded-circle mt-2" id="profile-img-card" src="{{friend.0.profile.image.url}}">
-        </a>
+        <div class="row row-cols-1">
+            <div class="col col-md-4 col-lg-3">
 
-        <p>{{friend.0.profile.user.first_name}}</p>
-        
-        <!-- if the authenticated user already sent a friend request to users in the friends list -->
-        {% if friend.0 in friend_request_sent %}
-            {% for request in friend_request_sent %}
-            {% if request|stringformat:'s' == friend.0|stringformat:'s' %}
-                <span class="btn btn-danger" onclick='triggerCancelFriendRequest("{{ request.id }}")'>Cancel Friend Request</span>
-            {% endif %}
-            {% endfor %}
-        <!-- if not then check if other user sent authenticated user a friend request -->
-        {% elif friend.0 in friend_request_received %}
-            {% for request in get_friend_request_received %}
-                {% if request|stringformat:'s' == friend.0|stringformat:'s' %}
-                    <span class="btn btn-primary" id="id_confirm_{{friend.0}}" onclick='triggerAcceptFriendRequest("{{ request.id }}")'>Accept</span>
-                    <span class="btn btn-danger" id="id_cancel_{{friend.0}}" onclick='triggerDeclineFriendRequest("{{ request.id }}")'>Decline</span>
-                {% endif %}
-            {% endfor %}
+            </div>
 
-        <!-- if user is friends with the authenticated user, allow user to remove them -->
-        {% elif friend.1 %}
-            <button class="btn btn-danger" onclick='triggerRemoveFriend("{{ friend.0.id }}")'>Remove Friend</button>
-        <!-- if user is looking at their own icon in the friend list -->
-        {% elif friend.0 == request.user %}
-        <!-- if not then allow authenticated user to send friend request -->
-        {% else %}
-            <button class="btn btn-primary" onclick='triggerSendFriendRequest("{{ friend.0.id }}")'>Add Friend</button>
-        {% endif %}
+            <div class="col col-lg-9 px-4">
+                <ul id="profile-nav" class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{% url 'profile' %}"> <i class="fas fa-cog"></i>
+                            <span class="nav-profile">Edit Profile</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'list-friends' user.id %}"><i class="fas fa-user-friends"></i>
+                            <span class="nav-profile">Buddies</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'list-friend-requests' user.id %}"><i class="fas fa-bell"></i>
+                            <span class="nav-profile">Friend Requests</span></a>
+                    </li>
+                </ul>
+                <hr class="mt-1">
+            </div>
+        </div>
+
+        <div class="row row-cols-1">
+            <div class="col col-md-4 col-lg-3">
+                <!-- Profile Info Section -->
+                <div class="card card-block border-0 shadow ">
+                    <div class="container mt-2">
+                        <img id="account_img" class="rounded-circle shadow account-img" src="{{ profile_image_url }}">
+                        <div class="mt-2">
+                            <h2 class="card-title mb-0">{{ user.first_name }} {{ user.last_name }}</h2>
+                            <p id="username">{{user.username}}</p>
+                            <a id="num-buddies" href="{% url 'list-friends' user.id %}">
+                                <p><i class="fas fa-user-friends"></i> <span class="fw-bold">{{friends|length}}</span>
+                                    Buddies</p>
+                            </a>
+                            {% if friend_requests %}
+                            <a class="btn btn-primary" href="{% url 'list-friend-requests' user.id %}">
+                                <p>Friend Requests ({{friend_requests|length}})</p>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-md-8 col-lg-9">
+                <div class="card border-0 card-block-info">
+                    <div class="card-body card-info">
+                        {% if friends %}
+
+                        {% for friend in friends %}
+                        <div>
+                            <a href="{% url 'public-profile' friend.0.profile.user.id %}">
+                                <img class="rounded-circle mt-2" id="profile-img-card"
+                                    src="{{friend.0.profile.image.url}}">
+                            </a>
+
+                            <p>{{friend.0.profile.user.first_name}}</p>
+
+                            <!-- if the authenticated user already sent a friend request to users in the friends list -->
+                            {% if friend.0 in friend_request_sent %}
+                            {% for request in friend_request_sent %}
+                            {% if request|stringformat:'s' == friend.0|stringformat:'s' %}
+                            <span class="btn btn-danger" onclick='triggerCancelFriendRequest("{{ request.id }}")'>Cancel
+                                Friend Request</span>
+                            {% endif %}
+                            {% endfor %}
+                            <!-- if not then check if other user sent authenticated user a friend request -->
+                            {% elif friend.0 in friend_request_received %}
+                            {% for request in get_friend_request_received %}
+                            {% if request|stringformat:'s' == friend.0|stringformat:'s' %}
+                            <span class="btn btn-primary" id="id_confirm_{{friend.0}}"
+                                onclick='triggerAcceptFriendRequest("{{ request.id }}")'>Accept</span>
+                            <span class="btn btn-danger" id="id_cancel_{{friend.0}}"
+                                onclick='triggerDeclineFriendRequest("{{ request.id }}")'>Decline</span>
+                            {% endif %}
+                            {% endfor %}
+
+                            <!-- if user is friends with the authenticated user, allow user to remove them -->
+                            {% elif friend.1 %}
+                            <button class="btn btn-danger" onclick='triggerRemoveFriend("{{ friend.0.id }}")'>Remove
+                                Friend</button>
+                            <!-- if user is looking at their own icon in the friend list -->
+                            {% elif friend.0 == request.user %}
+                            <!-- if not then allow authenticated user to send friend request -->
+                            {% else %}
+                            <button class="btn btn-primary" onclick='triggerSendFriendRequest("{{ friend.0.id }}")'>Add
+                                Friend</button>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+
+                        {% else %}
+                        <p>No friends yet.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    {% endfor %}
-
-{% else %}
-        <p>No friends yet.</p>
-{% endif %}
-</div>
 
 
 <script>
+    function onFriendRequestSent() {
+        location.reload()
+    }
 
-    function onFriendRequestSent() {location.reload()}
-    function onFriendRequestAccepted() {location.reload()}
-    function onFriendRequestDeclined() {location.reload()}
-    function onFriendRemoved() {location.reload()}
-    function onFriendRequestCancelled() {location.reload()}
+    function onFriendRequestAccepted() {
+        location.reload()
+    }
+
+    function onFriendRequestDeclined() {
+        location.reload()
+    }
+
+    function onFriendRemoved() {
+        location.reload()
+    }
+
+    function onFriendRequestCancelled() {
+        location.reload()
+    }
 
     function triggerSendFriendRequest(friend_id) {
         sendFriendRequest(friend_id, onFriendRequestSent)
@@ -81,7 +154,6 @@
     function triggerRemoveFriend(friend_id) {
         removeFriend(friend_id, onFriendRemoved)
     }
-
 </script>
 
 {% include 'users/snippets/send_friend_request.html' %}

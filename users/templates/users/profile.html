@@ -14,6 +14,27 @@
 
   <div class="row row-cols-1">
     <div class="col col-md-4 col-lg-3">
+
+    </div>
+
+    <div class="col col-lg-9 px-4">
+      <ul id="profile-nav" class="nav">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="{% url 'profile' %}"> <i class="fas fa-cog"></i> <span class="nav-profile">Edit Profile</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'list-friends' user.id %}"><i class="fas fa-user-friends"></i> <span class="nav-profile">Buddies</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'list-friend-requests' user.id %}"><i class="fas fa-bell"></i> <span class="nav-profile">Friend Requests</span></a>
+        </li>
+      </ul>
+      <hr class="mt-1">
+    </div>
+  </div>
+
+  <div class="row row-cols-1">
+    <div class="col col-md-4 col-lg-3">
     <!-- Profile Info Section -->
       <div class="card card-block border-0 shadow ">
         <div class="container mt-2">
@@ -34,12 +55,12 @@
       </div>
     </div>
     <div class="col col-md-8 col-lg-9">
-      <div class="card shadow border-0 card-block-info">
+      <div class="card border-0 card-block-info">
         <div class="card-body card-info">
           <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">User Information</legend>
+                <legend id="nav-heading" class="mb-4">Edit User Information</legend>
                 {{ u_form|crispy }}
                 {{ p_form|crispy }}
             </fieldset>
@@ -53,40 +74,6 @@
   </div>
 </div>
 
-
-
-
-
-
-<!-- <div class="container mt-5">
-<div class="bg-light p-5 rounded m-3 profile-body">
-  <h1 class="">My Account</h1>
-  <div class="account-body">
-          <h2 class="account-heading mt-3">{{ user.username }}</h2>
-          <p class="text-secondary pb-2">{{ user.email }}</p>
-          <a class="btn btn-primary" href="{% url 'list-friends' user.id %}">
-            <p>Friends ({{friends|length}})</p>
-          </a>
-          {% if friend_requests %}
-          <a class="btn btn-primary" href="{% url 'list-friend-requests' user.id %}">
-            <p>Friend Requests ({{friend_requests|length}})</p>
-          </a>
-          {% endif %}
-          <form method="POST" enctype="multipart/form-data">
-              {% csrf_token %}
-              <fieldset class="form-group">
-                  <legend class="border-bottom mb-4">User Information</legend>
-                <img id="account_img" class="rounded-circle shadow account-img" src="{{ profile_image_url }}">
-                  {{ u_form|crispy }}
-                  {{ p_form|crispy }}
-              </fieldset>
-              <div class="form-group">
-                  <button class="mt-3 btn btn-primary" type="submit">Update</button>
-              </div>
-          </form>
-  </div>
-</div>
-</div> -->
 
 <script>
 
