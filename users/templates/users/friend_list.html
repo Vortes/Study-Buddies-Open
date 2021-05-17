@@ -17,6 +17,8 @@
             </div>
 
             <div class="col col-lg-9 px-4">
+                <!-- different nav options depending on if user is looking at own friend list or other person friend list -->
+                {% if request.user == profile %}
                 <ul id="profile-nav" class="nav">
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="{% url 'profile' %}"> <i class="fas fa-cog"></i>
@@ -31,6 +33,15 @@
                             <span class="nav-profile">Friend Requests</span></a>
                     </li>
                 </ul>
+                {% else %}
+                <ul id="profile-nav" class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'list-friends' profile.id %}"><i class="fas fa-user-friends"></i>
+                            <span class="nav-profile">Buddies</span></a>
+                    </li>
+                </ul>
+                {% endif %}
+
                 <hr class="mt-1">
             </div>
         </div>
@@ -42,9 +53,9 @@
                     <div class="container mt-2">
                         <img id="account_img" class="rounded-circle shadow account-img" src="{{ profile_image_url }}">
                         <div class="mt-2">
-                            <h2 class="card-title mb-0">{{ user.first_name }} {{ user.last_name }}</h2>
-                            <p id="username">{{user.username}}</p>
-                            <a id="num-buddies" href="{% url 'list-friends' user.id %}">
+                            <h2 class="card-title mb-0">{{ profile.first_name }} {{ profile.last_name }}</h2>
+                            <p id="username">{{profile.username}}</p>
+                            <a id="num-buddies" href="{% url 'list-friends' profile.id %}">
                                 <p><i class="fas fa-user-friends"></i> <span class="fw-bold">{{friends|length}}</span>
                                     Buddies</p>
                             </a>

@@ -150,6 +150,7 @@ def friend_list(request, *args, **kwargs):
     context = {}
     user = request.user
     user_id = kwargs.get("user_id")
+    profile = User.objects.get(id=user_id)
 
     if user_id:
         try:
@@ -182,8 +183,6 @@ def friend_list(request, *args, **kwargs):
         for friend_request in get_friend_requests_received:
             friend_request_received.append(friend_request.get_sender())
         
-        print(friend_request_sent)
-        print(get_friend_requests_sent)
 
         context['friends'] = friends
         context['friend_request_sent'] = friend_request_sent
@@ -191,6 +190,7 @@ def friend_list(request, *args, **kwargs):
         context['get_friend_request_sent'] = get_friend_requests_sent
         context['get_friend_request_received'] = get_friend_requests_received
         context['auth_user_friend_list'] = auth_user_friend_list
+        context['profile'] = profile
 
 
         response = get_presigned_url(request.user)
