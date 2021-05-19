@@ -77,30 +77,6 @@
 </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-<div class="bg-light p-5 rounded m-3 profile-body">
-    {% if friend_requests %}
-        {% for friend in friend_requests %}
-        <p>{{friend.sender.first_name}}</p>
-        <img class="rounded-circle mt-2" id="profile-img-card" src="{{friend.sender.profile.image.url}}">
-        <span class="btn btn-primary" id="id_confirm_{{friend.sender.id}}" onclick='triggerAcceptFriendRequest("{{ friend.id }}")'>Accept</span>
-        <span class="btn btn-danger" id="id_cancel_{{friend.sender.id}}" onclick='triggerDeclineFriendRequest("{{ friend.id }}")'>Decline</span>
-        {% endfor %}
-    {% else %}
-    <p>no friend requests</p>
-    {% endif %}
-</div>
-
 <script>
 
     function onFriendRequestAccepted() {location.reload()}

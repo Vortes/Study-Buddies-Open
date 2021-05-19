@@ -9,6 +9,7 @@ from .forms import UserRegisterForm, ProfileUpdateForm, UserUpdateForm
 from django.contrib.auth.models import User
 from users.utils import get_friend_request_or_false
 from users.friend_request_status import FriendRequestStatus
+from post.models import Post
 import boto3
 import time
 import json
@@ -134,7 +135,12 @@ def public_profile(request, pk):
     other_user = get_presigned_url(profile)
     if request.user.is_authenticated:
         response = get_presigned_url(request.user)
+    
+    participating_in = Profile.objects.get(user=profile).participating_in
+    print(participating_in)
 
+    context["post"] = participating_in
+    context["participating_in"] = participating_in
     context["profile"] = profile
     context["profile_image_url"] = response
     context["other_profile_url"] = other_user
