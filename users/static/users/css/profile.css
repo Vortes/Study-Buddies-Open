@@ -61,6 +61,20 @@
 	font-size: 1.2rem;
 }
 
+#profile-img-card {
+	width: 3.5rem;
+	height: 3.5rem;
+}
+
+#friend-name {
+	text-decoration: none;
+	color: rgb(38, 41, 46);
+}
+
+#friend-name:hover {
+	color: rgb(38, 112, 231);
+}
+
 .nav-link {
 	padding-left: 0px;
 	padding-right: 2rem;

@@ -17,6 +17,7 @@ from django.conf import settings
 from users.models import Profile
 import boto3
 
+
 def home_view(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('/home')
@@ -32,6 +33,7 @@ def home_view(request):
 
     context = {"recent_posts": recent_posts, "enough_posts": enough_posts}
     return render(request, "post/info-home.html", context)
+
 
 def post_view(request):
 
@@ -69,6 +71,7 @@ class PostSearchResultView(ListView):
             Q(title__icontains=query) | Q(subject__tag_name__icontains=query) | Q(author__first_name__icontains=query)
         )
         return object_list
+
 
 
 def detail_view(request, pk):

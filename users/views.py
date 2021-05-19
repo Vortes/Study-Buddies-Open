@@ -153,6 +153,16 @@ def friend_list(request, *args, **kwargs):
     profile = User.objects.get(id=user_id)
 
     if user_id:
+
+        if request.user.is_authenticated:
+            # Get your friendlist
+            try:
+                friend_list_current_user = FriendList.objects.get(user=request.user)
+            # if you dont have a friendlist, make a new one
+            except FriendList.DoesNotExist:
+                friend_list_current_user = FriendList(user=request.user)
+                friend_list_current_user.save()
+
         try:
             this_user = User.objects.get(pk=user_id)
             context['this_user'] = this_user
@@ -194,6 +204,9 @@ def friend_list(request, *args, **kwargs):
 
 
         response = get_presigned_url(request.user)
+        other_user = get_presigned_url(profile)
+
+        context["other_user"] = other_user
         context["profile_image_url"] = response
     
     

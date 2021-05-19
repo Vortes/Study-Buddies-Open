@@ -16,6 +16,7 @@
 			<h4 class="pb-2 link">Group Link: {{detail.content}}</h4>
 		{% endif %}
 		<p><img class="rounded-circle post-img mt-2" src="{{detail.author.profile.image.url}}"> <strong class="px-2">{{detail.author.first_name}} {{detail.author.last_name}}</strong></p>
+		<p>{{detail.author}}</p>
 	</div>
 	</div>
 
@@ -32,7 +33,8 @@
 					<a href="{% url 'public-profile' participant.user.id %}">
 						<img class="rounded-circle mt-2" id="profile-img-card" src="{{participant.user.profile.image.url}}">
 					</a>
-					<p class="pt-3"><strong class="px-2">{{participant.user.first_name}} {{participant.user.last_name}} </strong></p>
+					<p class="pt-3 mb-0"><strong >{{participant.user.first_name}} {{participant.user.last_name}} </strong></p>
+					<p>{{participant.user}}</p>
 				</div>
 			</div>
 		</div>

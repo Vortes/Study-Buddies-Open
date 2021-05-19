@@ -4,12 +4,19 @@
 
   .post-img {   
   	height: 40px;   
-      width: 40px;   
+    width: 40px;   
+    object-fit: cover;
   }   
 
   #date {   
   	color: rgb(125,144,144)   
   }   
+
+  #profile-img-card {
+    height: 80px;   
+    width: 80px; 
+    object-fit: cover;
+  }
 
   .current-buddies {   
   	border-top: 1px solid rgba(46,62,72,.12);   
@@ -23,9 +30,3 @@
   	background-position: center;   
   	background-size: cover;   
   }   
-
-  #profile-img-card {   
-   height: 80px;   
-   width: 80px;   
-  }   
-
