@@ -224,6 +224,9 @@ def list_friend_requests(request, pk):
     user = request.user
     profile = User.objects.get(pk=pk)
 
+    friends = FriendList.objects.filter(friends=request.user)
+    print(friends)
+
     if user == profile:
         friend_requests = FriendRequest.objects.filter(receiver=profile, is_active=True)
     else:
@@ -236,6 +239,7 @@ def list_friend_requests(request, pk):
     context = {
         "friend_requests": friend_requests,
         "profile_image_url": response,
+        "friends": friends
     }
 
     return render(request, "users/friend_requests.html", context)

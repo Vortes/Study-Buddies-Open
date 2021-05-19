@@ -115,3 +115,9 @@ a {
 	object-fit: cover;
     margin-right: 10px;
 }
+
+@media only screen and (max-width: 360px) {
+	#friends-list-section {
+	  margin-top: 3rem;
+	}
+  }
