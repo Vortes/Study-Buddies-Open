@@ -3,19 +3,19 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+from django.urls import reverse
 from django.contrib.auth.models import User
 from .models import Post, Message
 from .forms import CreateForm
-from users.models import Profile
 from .filters import PostFilter
+from users.models import Profile
+from django.conf import settings
+import boto3
 from django.views.generic import (
     ListView,
     UpdateView,
     DeleteView,
 )
-from django.conf import settings
-from users.models import Profile
-import boto3
 
 
 def home_view(request):
@@ -38,8 +38,7 @@ def home_view(request):
 def post_view(request):
 
     if not request.user.is_authenticated:
-        return HttpResponseRedirect('/login')
-
+        return HttpResponseRedirect(reverse('login'))
 
     context = {}
     myFilter = PostFilter()
@@ -59,19 +58,41 @@ def post_view(request):
     return render(request, "post/home.html", context)
 
 
-class PostSearchResultView(ListView):
+class SearchPostView(ListView):
     model = Post
-    template_name = "post/search_result.html"
+    template_name = "post/search_posts.html"
     context_object_name = "search_results"
     ordering = ["-date_posted"]
 
     def get_queryset(self):
+        search_results = []
         query = self.request.GET.get("search")
-        object_list = Post.objects.filter(
+
+        post_query = Post.objects.filter(
             Q(title__icontains=query) | Q(subject__tag_name__icontains=query) | Q(author__first_name__icontains=query)
         )
-        return object_list
+        user_query = User.objects.filter(
+            Q(username__icontains=query)
+        )
 
+        search_results.extend([post_query, user_query])
+
+        return search_results
+
+
+
+# class SearchUserView(ListView):
+#     model = User
+#     template_name = "post/search_users.html"
+#     context_object_name = "search_results"
+#     ordering = ["username"]
+
+#     def get_queryset(self):
+#         query = self.request.GET.get("search")
+#         object_list = User.objects.filter(
+#             Q(username__icontains=query)
+#         )
+#         return object_list
 
 
 def detail_view(request, pk):
@@ -100,8 +121,8 @@ def detail_view(request, pk):
                     f"Successfully joined {post_id}!",
                 )
         else:
-            messages.info(request, f"Please sign in or register first")
-            return HttpResponseRedirect("/login")
+            messages.warning(request, f"Please sign in or register first")
+            return HttpResponseRedirect(reverse('login'))
 
     leave_button = request.POST.get("leave_group")
     if leave_button:

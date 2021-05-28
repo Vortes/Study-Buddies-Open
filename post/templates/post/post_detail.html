@@ -58,24 +58,21 @@
 	{% endif %}
 	{% endif %}
 
+	<div class="container mt-3 px-0">
+		<div class="">
+			<h4 id="comments">Comments</h4>
+			<div id="chat-messages" style="max-height: 300px; overflow-y: scroll;">{% for chat in chats %}<b>{{ chat.firstName }}</b>: {{ chat.content }}<br>{% endfor %}</div>
+		</div>
+		<div>
+			<input type="text" class="form-control input" placeholder="Message" id="chat-message-input">
+		</div>
+		
+		<a id="chat-message-submit" class="btn btn-primary mt-3">Submit</a>
+
+	</div>
 
 	</div>
 </div>
-
-
-<section class="section">
-        <div class="container mt-3">
-            <div class="">
-                <div id="chat-messages" style="max-height: 300px; overflow-y: scroll;">{% for chat in chats %}<b>{{ chat.firstName }}</b>: {{ chat.content }}<br>{% endfor %}</div>
-            </div>
-            <div>
-                <input type="text" class="form-control input" placeholder="Message" id="chat-message-input">
-            </div>
-            
-            <a id="chat-message-submit" class="btn btn-primary mt-3">Submit</a>
-
-		</div>
-    </section>
 
 
 

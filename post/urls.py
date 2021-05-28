@@ -3,7 +3,8 @@ from . import views
 from .views import (
     PostUpdateView,
     PostDeleteView,
-    PostSearchResultView,
+    SearchPostView,
+    # SearchUserView,
 )
 
 urlpatterns = [
@@ -14,8 +15,8 @@ urlpatterns = [
     path("post/<int:pk>/delete/", PostDeleteView.as_view(), name="post-delete"),
     path("post/create/", views.create_view, name="post-create"),
     path(
-        "post/search_result/",
-        PostSearchResultView.as_view(),
-        name="post-search-results",
+        "post/search_result/posts",
+        SearchPostView.as_view(),
+        name="search-post-results",
     ),
 ]

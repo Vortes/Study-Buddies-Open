@@ -10,7 +10,7 @@
 		<div class="row">
 			{% if search_results %}
 			<h1 class="mt-3">Search Results</h1>
-			{% for post in search_results %}
+			{% for post in search_results.0 %}
 				<div class="card card-block m-3 border-0 shadow overflow-auto" style='width:23rem;'>
 					<div class="col-sm">
 						<div class="card-body">

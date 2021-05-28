@@ -18,6 +18,10 @@
     object-fit: cover;
   }
 
+  #comments {
+    color: rgb(33, 33, 33);
+  }
+
   .current-buddies {   
   	border-top: 1px solid rgba(46,62,72,.12);   
   	background-color: rgb(246, 247, 248)    
