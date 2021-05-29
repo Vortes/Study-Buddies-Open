@@ -107,7 +107,11 @@
                         </p>
                         <p><img class="rounded-circle post-img" src="{{post.author.profile.image.url}}">
                             <strong>{{post.author.first_name}} {{post.author.last_name}}</strong></p>
-                        <p>Total Buddies: {{post.num_participants}} / {{post.max_buddies}}</p>
+					{% if post.max_buddies == 10000 %}
+						<p>Total Buddies: {{post.num_participants}} / unlimited </p>
+					{% else %}
+						<p>Total Buddies: {{post.num_participants}} / {{post.max_buddies}}</p>
+					{% endif %}
                     </div>
                 </div>
             </div>

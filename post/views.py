@@ -58,26 +58,21 @@ def post_view(request):
     return render(request, "post/home.html", context)
 
 
-class SearchPostView(ListView):
-    model = Post
-    template_name = "post/search_posts.html"
-    context_object_name = "search_results"
-    ordering = ["-date_posted"]
+def search_view(request):
 
-    def get_queryset(self):
-        search_results = []
-        query = self.request.GET.get("search")
+    query = request.GET.get("search")
+    post_query = Post.objects.filter(
+        Q(title__icontains=query) | Q(subject__tag_name__icontains=query) | Q(author__first_name__icontains=query)
+    )
 
-        post_query = Post.objects.filter(
-            Q(title__icontains=query) | Q(subject__tag_name__icontains=query) | Q(author__first_name__icontains=query)
-        )
-        user_query = User.objects.filter(
-            Q(username__icontains=query)
-        )
-
-        search_results.extend([post_query, user_query])
-
-        return search_results
+    response = ""
+    if request.user.is_authenticated:
+        response = get_presigned_url(request.user)
+    context = {
+        "search_results": post_query,
+        "profile_image_url": response,
+    }
+    return render(request, "post/search_posts.html", context)
 
 
 
