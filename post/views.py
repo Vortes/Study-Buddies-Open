@@ -58,21 +58,53 @@ def post_view(request):
     return render(request, "post/home.html", context)
 
 
-def search_view(request):
+def search_post_view(request):
 
     query = request.GET.get("search")
     post_query = Post.objects.filter(
-        Q(title__icontains=query) | Q(subject__tag_name__icontains=query) | Q(author__first_name__icontains=query)
+        Q(title__icontains=query) | Q(subject__tag_name__icontains=query)
     )
 
     response = ""
     if request.user.is_authenticated:
         response = get_presigned_url(request.user)
+
     context = {
-        "search_results": post_query,
+        "posts": post_query,
         "profile_image_url": response,
+        "query": query,
     }
+
+    search_user_clicked = request.POST.get("search_user")
+
+    if search_user_clicked:
+        user_query = User.objects.filter(
+            Q(username__icontains=query)| Q(first_name__icontains=query)
+        )
+        context["users"] = user_query
+
+        return render(request, "post/search_users.html", context)
+    
     return render(request, "post/search_posts.html", context)
+
+
+# def search_user_view(request):
+
+#     query = request.GET.get("search")
+#     post_query = Post.objects.filter(
+#         Q(title__icontains=query) | Q(subject__tag_name__icontains=query) | Q(author__first_name__icontains=query)
+#     )
+
+#     response = ""
+#     if request.user.is_authenticated:
+#         response = get_presigned_url(request.user)
+        
+#     context = {
+#         "search_results": post_query,
+#         "profile_image_url": response,
+#     }
+    
+#     return render(request, "post/search_posts.html", context)
 
 
 
