@@ -1,9 +1,11 @@
+from django.core import paginator
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
+from django.core.paginator import Paginator
 from .models import Profile, FriendList, FriendRequest
 from .forms import UserRegisterForm, ProfileUpdateForm, UserUpdateForm
 from django.contrib.auth.models import User
@@ -198,6 +200,10 @@ def friend_list(request, *args, **kwargs):
         
         for friend_request in get_friend_requests_received:
             friend_request_received.append(friend_request.get_sender())
+
+        paginator = Paginator(friends, 6)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
         
 
         context['friends'] = friends
@@ -207,6 +213,7 @@ def friend_list(request, *args, **kwargs):
         context['get_friend_request_received'] = get_friend_requests_received
         context['auth_user_friend_list'] = auth_user_friend_list
         context['profile'] = profile
+        context['page_obj'] = page_obj
 
 
         response = get_presigned_url(request.user)

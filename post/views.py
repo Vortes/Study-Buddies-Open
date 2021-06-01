@@ -93,40 +93,6 @@ def search_view(request):
     return render(request, "post/search_posts.html", context)
 
 
-# def search_user_view(request):
-
-#     query = request.GET.get("search")
-#     post_query = Post.objects.filter(
-#         Q(title__icontains=query) | Q(subject__tag_name__icontains=query) | Q(author__first_name__icontains=query)
-#     )
-
-#     response = ""
-#     if request.user.is_authenticated:
-#         response = get_presigned_url(request.user)
-        
-#     context = {
-#         "search_results": post_query,
-#         "profile_image_url": response,
-#     }
-    
-#     return render(request, "post/search_posts.html", context)
-
-
-
-# class SearchUserView(ListView):
-#     model = User
-#     template_name = "post/search_users.html"
-#     context_object_name = "search_results"
-#     ordering = ["username"]
-
-#     def get_queryset(self):
-#         query = self.request.GET.get("search")
-#         object_list = User.objects.filter(
-#             Q(username__icontains=query)
-#         )
-#         return object_list
-
-
 def detail_view(request, pk):
 
     participants = Profile.objects.all()
