@@ -58,12 +58,14 @@ def post_view(request):
     return render(request, "post/home.html", context)
 
 
-def search_post_view(request):
+def search_view(request):
 
     query = request.GET.get("search")
     post_query = Post.objects.filter(
         Q(title__icontains=query) | Q(subject__tag_name__icontains=query)
     )
+    num_of_posts = len(post_query)
+    print("posts: ", num_of_posts)
 
     response = ""
     if request.user.is_authenticated:
@@ -73,6 +75,7 @@ def search_post_view(request):
         "posts": post_query,
         "profile_image_url": response,
         "query": query,
+        "num_of_posts": num_of_posts,
     }
 
     search_user_clicked = request.POST.get("search_user")
@@ -81,7 +84,9 @@ def search_post_view(request):
         user_query = User.objects.filter(
             Q(username__icontains=query)| Q(first_name__icontains=query)
         )
+        num_of_users = len(user_query)
         context["users"] = user_query
+        context["num_of_users"] = num_of_users
 
         return render(request, "post/search_users.html", context)
     

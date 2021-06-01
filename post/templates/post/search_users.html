@@ -7,17 +7,21 @@
 {%block content%}
 <div class="container">
 		<div class="row">
+			<div class="container mt-4">
+				<h3 class="pb-2">Showing {{num_of_users}} users </h3>
+				<hr>
+			</div>
 			<form method="post">
 				{% csrf_token %}
-				<button type="submit" class="btn btn-primary mb-4" value="{{ query }}">posts</button>
+				<button type="submit" class="btn btn-primary mb-4" value="{{ query }}">Posts</button>
+				<button type="submit" name="search_user" class="btn btn-primary mb-4" value="{{ query }}">Users</button>
 			</form>
 			{% if users %}
-			<h1 class="mt-3">Search Results</h1>
 			{% for user in users %}
                 <p>{{user}}</p>
-		{% endfor %}
+			{% endfor %}
 		{% else %}
-		<h1 class="title mt-3">Sorry, your search returned no users</h1>
+		<h3 class="title mt-3"><i class="fas fa-search"></i> We couldn't find any users matching '{{query}}'</h3>
 		{% endif %}
 		</div>
 
