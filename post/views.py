@@ -50,27 +50,27 @@ def post_view(request):
 
     general_group = Post.objects.filter(
         Q(subject__tag_name__icontains="A General Discussion Group")
-    ).order_by('-date_posted')
+    ).order_by('-date_posted')[:10]
 
     math_sciences_group = Post.objects.filter(
         Q(subject__category__category_name__icontains= "Maths & Sciences")
-    ).order_by('-date_posted')
+    ).order_by('-date_posted')[:10]
 
     arts_humanities_group = Post.objects.filter(
         Q(subject__category__category_name__icontains="Arts & Humanities")
-    ).order_by('-date_posted')
+    ).order_by('-date_posted')[:10]
 
     computing_group = Post.objects.filter(
         Q(subject__category__category_name__icontains="Computing")
-    ).order_by('-date_posted')
+    ).order_by('-date_posted')[:10]
 
     economics_group = Post.objects.filter(
         Q(subject__category__category_name__icontains="Economics")
-    ).order_by('-date_posted')
+    ).order_by('-date_posted')[:10]
 
     test_prep_group = Post.objects.filter(
         Q(subject__category__category_name__icontains="Test Prep")
-    ).order_by('-date_posted')
+    ).order_by('-date_posted')[:10]
 
     response = ''
 
