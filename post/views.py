@@ -77,9 +77,6 @@ def post_view(request):
     if request.user.is_authenticated:
         response = get_presigned_url(request.user)
 
-    print(general_group)
-    print(math_sciences_group)
-
     context = {
                 "posts": posts, 
                 "myFilter": myFilter, 

@@ -19,19 +19,7 @@
 			</form>
 			{% if posts %}
 			{% for post in posts %}
-				<div class="card card-block m-3 border-0 shadow overflow-auto" style='width:23rem;'>
-					<div class="col-sm">
-						<div class="card-body">
-							<h3><a class="card-title stretched-link" id="title"
-									href="{% url 'post-detail' post.pk %}">{{post.title}}<span class="post-tag"> |
-										{{post.subject}}</span></a>
-							</h3>
-							<p class="card-subtitle card-date mb-2 ">{{post.date_posted|date:"F, d Y"}}</p>
-							<p><img class="rounded-circle post-img" src="{{post.author.profile.image.url}}"> <strong>{{post.author.first_name}} {{post.author.last_name}}</strong></p>
-							<p>Total Buddies: {{post.num_participants}} / {{post.max_buddies}}</p>
-						</div>
-					</div>
-				</div>
+				{% include 'post/snippets/card-information.html' %}
 			{% endfor %}
 		{% else %}
 		<h3 class="title mt-3"><i class="fas fa-search"></i> We couldn't find any groups matching '{{query}}'</h3>

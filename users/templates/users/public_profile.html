@@ -5,6 +5,7 @@
 {% block header %}
 <link rel="stylesheet" href="{% static 'users/css/login_register.css' %}">
 <link rel="stylesheet" href="{% static 'users/css/profile.css' %}">
+<link rel="stylesheet" href="{% static 'post/css/home.css' %}">
 {% endblock header %}
 
 {%block content%}
@@ -53,7 +54,7 @@
     <div class="row row-cols-1">
         <div class="col col-md-4 col-lg-3">
             <!-- Profile Info Section -->
-            <div class="card card-block border-0 shadow ">
+            <div class="card card-block border-0 shadow" id="profile-block">
                 <div class="container mt-2">
                     <img id="account_img" class="rounded-circle shadow account-img" src="{{ other_profile_url }}">
                     <div class="mt-2">
@@ -104,35 +105,7 @@
 
                   {% if participating_in %}
                   <!-- get users created group -->
-                  <div class="card card-block m-3 border-0 shadow" id="post-card" style='width:23rem;'>
-                    <div class="col-sm">
-                      <div class="card-body">
-                        <h3><a class="card-title stretched-link" id="title"
-                            href="{% url 'post-detail' post.pk %}">{{post.title}}<span class="post-tag"> |
-                              {{post.subject}}</span></a>
-                        </h3>
-                          <p class="card-subtitle card-date mb-2 pr-2">{{post.date_posted|date:"F, d Y"}} - 
-                          {% if post.quiet_tag %}
-                            <i class="fas fa-volume-mute"></i>
-                          {% else %}
-                            <i class="fas fa-microphone"></i>
-                          {% endif %}
-                
-                          {% if post.camera_tag %}
-                            <i class="fas fa-video-slash"></i>
-                          {% else %}
-                            <i class="fas fa-camera"></i>
-                          {% endif %}
-                          </p>
-                        <p><img class="rounded-circle post-img" src="{{post.author.profile.image.url}}"> <strong>{{post.author.first_name}} {{post.author.last_name}}</strong></p>
-                          {% if post.max_buddies == 10000 %}
-                            <p>Total Buddies: {{post.num_participants}} / unlimited </p>
-                          {% else %}
-                            <p>Total Buddies: {{post.num_participants}} / {{post.max_buddies}}</p>
-                          {% endif %}
-                      </div>
-                    </div>
-                  </div>
+                    {% include 'post/snippets/card-information.html' %}
                   {% else %}
                   <p>Not participating in a group yet.</p>
                   {% endif %}

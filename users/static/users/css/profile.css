@@ -4,7 +4,7 @@
 
 .card-block{
 	top: 0;
-	height: 500px; 
+	height: 500px;
 	background-position: center;
 	background-size: cover;
 	border-radius: 10px;
@@ -94,6 +94,10 @@
 
 #post-card:hover {
 	top: -8px;
+}
+
+#profile-block {
+	height: 500px !important;
 }
 
 a {
