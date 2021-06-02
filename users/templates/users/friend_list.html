@@ -53,25 +53,16 @@
 
     <div class="row row-cols-1">
         <div class="col col-md-4 col-lg-3">
-            <!-- Profile Info Section -->
-            <div class="card card-block border-0 shadow ">
-                <div class="container mt-2">
-                    <img id="account_img" class="rounded-circle shadow account-img" src="{{ other_user }}">
-                    <div class="mt-2">
-                        <h2 class="card-title mb-0">{{ profile.first_name }} {{ profile.last_name }}</h2>
-                        <p id="username">{{profile.username}}</p>
-                        <a id="num-buddies" href="{% url 'list-friends' profile.id %}">
-                            <p><i class="fas fa-user-friends"></i> <span class="fw-bold">{{friends|length}}</span>
-                                Buddies</p>
-                        </a>
-                        {% if friend_requests %}
-                        <a class="btn btn-primary" href="{% url 'list-friend-requests' profile.id %}">
-                            <p>Friend Requests ({{friend_requests|length}})</p>
-                        </a>
-                        {% endif %}
+            <!-- Profile Info Section For request.user -->
+            {% if request.user == profile %}
+                {% include 'users/snippets/profile-info-snippets.html' %}   
+            <!-- Profile Info Section For Public Profile -->
+            {% else %}
+                {% include 'users/snippets/public-profile-info-snippets.html' %}       
+                        </div>
                     </div>
                 </div>
-            </div>
+            {% endif %}
         </div>
         <!-- list friends section -->
         <div class="col col-md-8 col-lg-9">

@@ -1,0 +1,18 @@
+<div class="card card-block border-0 shadow ">
+    <div class="container mt-2">
+        <img id="account_img" class="rounded-circle shadow account-img" src="{{ profile_image_url }}">
+        <div class="mt-2">
+            <h2 class="card-title mb-0">{{ user.first_name }} {{ user.last_name }}</h2>
+            <p class="mb-2" id="username">{{user.username}}</p>
+            <p id="profile-description">{{user.profile.description}}</p>
+            <a id="num-buddies" href="{% url 'list-friends' user.id %}">
+                <p><i class="fas fa-user-friends"></i> <span class="fw-bold">{{friends|length}}</span> Buddies</p>
+            </a>
+            {% if friend_requests %}
+            <a class="btn btn-primary" href="{% url 'list-friend-requests' user.id %}">
+                <p>Friend Requests ({{friend_requests|length}})</p>
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</div>

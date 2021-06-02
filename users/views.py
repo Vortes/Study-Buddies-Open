@@ -219,7 +219,7 @@ def friend_list(request, *args, **kwargs):
         response = get_presigned_url(request.user)
         other_user = get_presigned_url(profile)
 
-        context["other_user"] = other_user
+        context["other_profile_url"] = other_user
         context["profile_image_url"] = response
     
     

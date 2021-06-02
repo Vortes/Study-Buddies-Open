@@ -54,47 +54,33 @@
     <div class="row row-cols-1">
         <div class="col col-md-4 col-lg-3">
             <!-- Profile Info Section -->
-            <div class="card card-block border-0 shadow" id="profile-block">
-                <div class="container mt-2">
-                    <img id="account_img" class="rounded-circle shadow account-img" src="{{ other_profile_url }}">
-                    <div class="mt-2">
-                        <h2 class="card-title mb-0">{{ profile.first_name }} {{ profile.last_name }}</h2>
-                        <p id="username">{{profile.username}}</p>
-                        <a id="num-buddies" href="{% url 'list-friends' profile.id %}">
-                            <p><i class="fas fa-user-friends"></i> <span class="fw-bold">{{friends|length}}</span>
-                                Buddies</p>
-                        </a>
-                        {% if friend_requests %}
-                        <a class="btn btn-primary" href="{% url 'list-friend-requests' profile.id %}">
-                            <p>Friend Requests ({{friend_requests|length}})</p>
-                        </a>
-                        {% endif %}
+            {% include 'users/snippets/public-profile-info-snippets.html' %}  
 
-                        {% if request.user.is_authenticated %}
+              {% if request.user.is_authenticated %}
 
-                            {% if request_sent == 0 %}
-                              <div>
-                                <p>Accept friend request</p>
-                              </div>
+                  {% if request_sent == 0 %}
+                    <div>
+                      <p>Accept friend request</p>
+                    </div>
 
-                              <span id="id_cancel_{{id}}" class="btn-btn-danger" onclick='triggerDeclineFriendRequest("{{pending_friend_request_id}}")'>Decline</span>
-                              <span id="id_confirm_{{id}}" class="btn-btn-danger" onclick='triggerAcceptFriendRequest("{{pending_friend_request_id}}")'>Accept</span>
-                            {% endif %}
+                    <span id="id_cancel_{{id}}" class="btn-btn-danger" onclick='triggerDeclineFriendRequest("{{pending_friend_request_id}}")'>Decline</span>
+                    <span id="id_confirm_{{id}}" class="btn-btn-danger" onclick='triggerAcceptFriendRequest("{{pending_friend_request_id}}")'>Accept</span>
+                  {% endif %}
 
-                            {% if is_friend == False %}
-                              {% if request_sent == 1 %}
-                                <button class="btn btn-danger" id="id_cancel_friend_request_btn">Cancel Friend Request</button>
-                              {% endif %}
+                  {% if is_friend == False %}
+                    {% if request_sent == 1 %}
+                      <button class="btn btn-danger" id="id_cancel_friend_request_btn">Cancel Friend Request</button>
+                    {% endif %}
 
-                              {% if request_sent == -1 %}
-                                <button class="btn btn-primary" id="id_send_friend_request_btn">Add Friend</button>
-                              {% endif %}
-                            {% endif %}
+                    {% if request_sent == -1 %}
+                      <button class="btn btn-primary" id="id_send_friend_request_btn">Add Friend</button>
+                    {% endif %}
+                  {% endif %}
 
-                            {% if is_friend %} 
-                              <a class="btn btn-danger" href="#", onclick="removeFriend('{{id}}', onFriendRemoved)">Unfriend</a>
-                            {% endif %}
-                          {% endif %}
+                  {% if is_friend %} 
+                    <a class="btn btn-danger" href="#", onclick="removeFriend('{{id}}', onFriendRemoved)">Unfriend</a>
+                  {% endif %}
+                {% endif %}
                     </div>
                 </div>
             </div>

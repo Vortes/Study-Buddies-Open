@@ -79,6 +79,7 @@ class Profile(models.Model):
         Post, on_delete=models.SET_NULL, default=None, null=True, related_name="participating_in"
     )
     image = models.ImageField(default="default.png", upload_to="profile_pics")
+    description = models.CharField(default="", max_length=500)
 
     def __str__(self):
         return f"{ self.user }'s Profile"

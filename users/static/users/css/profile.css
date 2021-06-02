@@ -92,12 +92,22 @@
 	text-transform: capitalize;
 }
 
+#profile-description {
+	font-weight: 400;
+	font-size: 1rem;
+	color: rgb(74, 78, 85);
+}
+
 #post-card:hover {
 	top: -8px;
 }
 
 #profile-block {
 	height: 500px !important;
+}
+
+.card-block:hover {
+	top: 0px !important;
 }
 
 a {
@@ -124,4 +134,5 @@ a {
 	#friends-list-section {
 	  margin-top: 3rem;
 	}
-  }
+}
+
