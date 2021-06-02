@@ -48,12 +48,49 @@ def post_view(request):
     myFilter = PostFilter(request.GET, queryset=posts)
     posts = myFilter.qs
 
+    general_group = Post.objects.filter(
+        Q(subject__tag_name__icontains="A General Discussion Group")
+    ).order_by('-date_posted')
+
+    math_sciences_group = Post.objects.filter(
+        Q(subject__category__category_name__icontains= "Maths & Sciences")
+    ).order_by('-date_posted')
+
+    arts_humanities_group = Post.objects.filter(
+        Q(subject__category__category_name__icontains="Arts & Humanities")
+    ).order_by('-date_posted')
+
+    computing_group = Post.objects.filter(
+        Q(subject__category__category_name__icontains="Computing")
+    ).order_by('-date_posted')
+
+    economics_group = Post.objects.filter(
+        Q(subject__category__category_name__icontains="Economics")
+    ).order_by('-date_posted')
+
+    test_prep_group = Post.objects.filter(
+        Q(subject__category__category_name__icontains="Test Prep")
+    ).order_by('-date_posted')
+
     response = ''
 
     if request.user.is_authenticated:
         response = get_presigned_url(request.user)
 
-    context = {"posts": posts, "myFilter": myFilter, "profile_image_url": response}
+    print(general_group)
+    print(math_sciences_group)
+
+    context = {
+                "posts": posts, 
+                "myFilter": myFilter, 
+                "profile_image_url": response, 
+                "general_group": general_group,
+                "math_sciences_group": math_sciences_group,
+                "arts_humanities_group": arts_humanities_group,
+                "computing_group": computing_group,
+                "economics_group": economics_group,
+                "test_prep_group": test_prep_group,
+               }
 
     return render(request, "post/home.html", context)
 

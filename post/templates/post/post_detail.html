@@ -16,7 +16,6 @@
 			<h4 class="pb-2 link">Group Link: {{detail.content}}</h4>
 		{% endif %}
 		<p><img class="rounded-circle post-img mt-2" src="{{detail.author.profile.image.url}}"> <strong class="px-2">{{detail.author.first_name}} {{detail.author.last_name}}</strong></p>
-		<p>{{detail.author}}</p>
 	</div>
 	</div>
 
@@ -27,14 +26,13 @@
 	{% for participant in participants %}
 	{% if participant.participating_in|stringformat:'s' == detail.title|stringformat:'s' %}
 
-		<div class="card card-block m-3 mx-2 border-0 shadow overflow-auto text-center" >
+		<div class="card card-block m-3 mx-2 border-0 shadow overflow-hidden text-center" >
 			<div class="col-sm">
 				<div class="card-body">
 					<a href="{% url 'public-profile' participant.user.id %}">
 						<img class="rounded-circle mt-2" id="profile-img-card" src="{{participant.user.profile.image.url}}">
 					</a>
-					<p class="pt-3 mb-0"><strong >{{participant.user.first_name}} {{participant.user.last_name}} </strong></p>
-					<p>{{participant.user}}</p>
+					<p class="pt-3 mb-0"><strong >{{participant.user.first_name}} {{participant.user.last_name|make_list|first}} </strong></p>
 				</div>
 			</div>
 		</div>
@@ -58,6 +56,7 @@
 	{% endif %}
 	{% endif %}
 
+	{% if user.profile.participating_in|stringformat:'s' == detail.title|stringformat:'s'  %}
 	<div class="container mt-3 px-0">
 		<div class="">
 			<h4 id="comments">Comments</h4>
@@ -68,8 +67,8 @@
 		</div>
 		
 		<a id="chat-message-submit" class="btn btn-primary mt-3">Submit</a>
-
 	</div>
+	{% endif %}
 
 	</div>
 </div>

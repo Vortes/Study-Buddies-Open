@@ -18,6 +18,10 @@
     object-fit: cover;
   }
 
+  #profile-card {
+    overflow-y: hidden;
+  }
+
   #comments {
     color: rgb(33, 33, 33);
   }
