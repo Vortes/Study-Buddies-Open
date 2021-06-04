@@ -1,13 +1,8 @@
+/* 
+----- SCROLLING -----
+*/
 html {
 	scroll-behavior: smooth;
-}
-
-h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
-    margin-top: 0;
-    margin-bottom: .75rem;
-    font-weight: 540;
-    line-height: 1.2;
-    color: #4a4b65;
 }
 
 .scrolling-wrapper{
@@ -18,40 +13,10 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     display: none;
 }
 
-.card-block{
-	top: 0;
-	height: 250px;
-	background-position: center;
-	background-size: cover;
-	transition: top ease 0.2s;
-	border-radius: 24px;
-	text-transform: capitalize;
-}
-
-.card-block:hover {
-	top: -8px;
-}
-
-a {
-	text-decoration: none;
-	color: rgb(56,54,77);
-}
-
-.card-date {
-	color: rgb(224, 105, 78);
-}
-
-.post-tag {
-	color: rgb(219, 48, 105);
-}
+/* 
+----- SCROLLING -----
+*/
 
 #search-form {
 	background-color: rgb(246, 247, 248) 
-}
-
-.post-img {
-	height: 28px;
-    width: 28px;
-	object-fit: cover;
-    margin-right: 10px;
 }

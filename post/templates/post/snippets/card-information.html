@@ -1,7 +1,7 @@
 <div class="card card-block m-3 border-0 shadow overflow-auto" style='width:23rem;'>
     <div class="col-sm">
         <div class="card-body">
-            <h3><a class="card-title stretched-link" id="title"
+            <h3><a class="card-title stretched-link"
                     href="{% url 'post-detail' post.pk %}">{{post.title}}<span class="post-tag"> |
                         {{post.subject}}</span></a>
             </h3>
@@ -18,8 +18,8 @@
                 <i class="fas fa-camera"></i>
                 {% endif %}
             </p>
-            <p><img class="rounded-circle post-img" src="{{post.author.profile.image.url}}">
-                <strong>{{post.author.first_name}} {{post.author.last_name}}</strong></p>
+            <p id="post-author-name"><img class="rounded-circle" id="post-img" src="{{post.author.profile.image.url}}">
+                {{post.author.first_name}} {{post.author.last_name}}</p>
             {% if post.max_buddies == 10000 %}
             <p>Total Buddies: {{post.num_participants}} / Unlimited </p>
             {% else %}

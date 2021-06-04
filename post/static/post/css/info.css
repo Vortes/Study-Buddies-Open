@@ -1,18 +1,27 @@
-body {
-    font-family: 'Inter', sans-serif;
-}
+/* 
+----- MAIN PAGE CSS -----
+*/
 
 .page-wrapper {
     flex: 1 0 auto;
 }
 
-h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
-    margin-top: 0;
-    margin-bottom: .75rem;
-    font-weight: 600;
-    line-height: 1.2;
-    color: #4a4b65;
+/* 
+----- TYPOGRAPHY -----
+*/
+
+#title {
+    font-size: 3.6rem;
+    font-weight: 500;
 }
+
+#subtitle {
+    font-weight: 400;
+}
+
+/* 
+----- TITLE SCREEN -----
+*/
 
 img, figure {
     max-width: 100%;
@@ -50,10 +59,9 @@ img, figure {
     color: white;
 }
 
-
-.display-4 {
-    color: #4a4b65;
-}
+/* 
+----- CURVE SHAPE // HOW DOES IT WORK SECTION -----
+*/
 
 .text-muted {
     color: #9e9fb4 !important;
@@ -101,7 +109,12 @@ img, figure {
     background-color: rgba(118,109,244,0.08) !important;
 }
 
+/* 
+----- TESTIMONIAL -----
+*/
+
 .blockquote {
     color: rgba(118,109,244,0.5);
+    font-size: 1.35rem;
+    font-weight: 500;
 }
-

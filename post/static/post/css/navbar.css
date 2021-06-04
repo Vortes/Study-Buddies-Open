@@ -1,0 +1,75 @@
+
+#banner {
+	display: -ms-flexbox;
+	padding: 8em 0 6em 0;
+	align-items: center;
+	display: -moz-flex;
+	display: -webkit-flex;
+	display: -ms-flex;
+	display: flex;
+	-moz-justify-content: center;
+	-webkit-justify-content: center;
+	-ms-justify-content: center;
+	justify-content: center;
+	background-image: url("/static/post/images/bg2.jpg");
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	border-top: 0;
+	min-height: 100vh;
+	position: relative;
+	text-align: center;
+	overflow: hidden;
+	background-attachment: fixed;
+}
+
+#banner .inner {
+	z-index: 2;
+}
+
+
+#banner h1 {
+	font-size: 4em;
+	margin-bottom: .25em;
+	color: #FFF;
+}
+
+#banner p {
+	color: rgba(255, 255, 255, 0.85);
+	font-size: 1.75em;
+}
+
+
+#banner:before {
+	content: '';
+	display: block;
+	background-color: #000;
+	height: 100%;
+	left: 0;
+	opacity: 0.65;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: 1;
+		}
+
+.navbar a {
+  padding: 8px;
+  text-decoration: none;
+  display: inline-block;
+  color: rgba(202, 206, 221, 0.8);
+  font-weight: 400;
+  font-size: 19px;
+  outline: none;
+}
+
+#name {
+	font-size: 25px;
+}
+
+ .nav-img {
+	height: 50px;
+	width: 50px;
+	object-fit: cover;
+}
+
