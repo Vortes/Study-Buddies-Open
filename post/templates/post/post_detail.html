@@ -10,18 +10,17 @@
 
 	<div class="mt-3 header">
 		<p id="date" class="mb-0">{{detail.date_posted|date:"F, d Y"}}</p>
-		<h1 class="pb-2"><strong class="detail-title">{{detail.title}}</strong><span class="post-tag"> | {{detail.subject}}</span>
-		</h1>
+		<h1><strong>{{detail.title}}</strong><span id="post-subject"> | {{detail.subject}}</span></h1>
 		{% if request.user.profile.participating_in|stringformat:'s' == detail.title|stringformat:'s' %}
-			<h4 class="pb-2 link">Group Link: {{detail.content}}</h4>
+			<h4 class="pb-2">Group Link: {{detail.content}}</h4>
 		{% endif %}
-		<p><img class="rounded-circle post-img mt-2" src="{{detail.author.profile.image.url}}"> <strong class="px-2">{{detail.author.first_name}} {{detail.author.last_name}}</strong></p>
+		<p><img class="rounded-circle" id="author-img" src="{{detail.author.profile.image.url}}"> <strong class="px-2">{{detail.author.first_name}} {{detail.author.last_name}}</strong></p>
 	</div>
 	</div>
 
 	<div class="current-buddies">
 	<div class="container">
-	<h3 class="mt-4">Current Buddies</h3>
+	<h4 class="mt-4">Current Buddies: {{detail.num_participants}} / {{detail.max_buddies}}</h4>
 	<div class="scrolling-wrapper row flex-row flex-nowrap">
 	{% for participant in participants %}
 	{% if participant.participating_in|stringformat:'s' == detail.title|stringformat:'s' %}
@@ -59,7 +58,7 @@
 	{% if user.profile.participating_in|stringformat:'s' == detail.title|stringformat:'s'  %}
 	<div class="container mt-3 px-0">
 		<div class="">
-			<h4 id="comments">Comments</h4>
+			<h4>Comments</h4>
 			<div id="chat-messages" style="max-height: 300px; overflow-y: scroll;">{% for chat in chats %}<b>{{ chat.firstName }}</b>: {{ chat.content }}<br>{% endfor %}</div>
 		</div>
 		<div>
